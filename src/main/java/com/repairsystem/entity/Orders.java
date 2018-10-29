@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import java.util.Date;
 
-public class Order {
+public class Orders {
     /**
      * 工单ID
      */
@@ -36,12 +36,6 @@ public class Order {
     private Integer status;
 
     /**
-     * 提交工单的用户ID
-     */
-    @Column(name = "user_id")
-    private Integer userId;
-
-    /**
      * 提交时间
      */
     @Column(name = "submit_time")
@@ -58,6 +52,30 @@ public class Order {
      */
     @Column(name = "images_path")
     private String imagesPath;
+
+    /**
+     * 接手管理员ID
+     */
+    @Column(name = "admin_id")
+    private Integer adminId;
+
+    /**
+     * 报修人名称
+     */
+    @Column(name = "user_name")
+    private String userName;
+
+    /**
+     * 报修人电话
+     */
+    @Column(name = "user_phone")
+    private String userPhone;
+
+    /**
+     * 报修人邮箱
+     */
+    @Column(name = "user_email")
+    private String userEmail;
 
     /**
      * 工单问题
@@ -155,24 +173,6 @@ public class Order {
     }
 
     /**
-     * 获取提交工单的用户ID
-     *
-     * @return user_id - 提交工单的用户ID
-     */
-    public Integer getUserId() {
-        return userId;
-    }
-
-    /**
-     * 设置提交工单的用户ID
-     *
-     * @param userId 提交工单的用户ID
-     */
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
-    /**
      * 获取提交时间
      *
      * @return submit_time - 提交时间
@@ -224,6 +224,78 @@ public class Order {
      */
     public void setImagesPath(String imagesPath) {
         this.imagesPath = imagesPath;
+    }
+
+    /**
+     * 获取接手管理员ID
+     *
+     * @return admin_id - 接手管理员ID
+     */
+    public Integer getAdminId() {
+        return adminId;
+    }
+
+    /**
+     * 设置接手管理员ID
+     *
+     * @param adminId 接手管理员ID
+     */
+    public void setAdminId(Integer adminId) {
+        this.adminId = adminId;
+    }
+
+    /**
+     * 获取报修人名称
+     *
+     * @return user_name - 报修人名称
+     */
+    public String getUserName() {
+        return userName;
+    }
+
+    /**
+     * 设置报修人名称
+     *
+     * @param userName 报修人名称
+     */
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    /**
+     * 获取报修人电话
+     *
+     * @return user_phone - 报修人电话
+     */
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    /**
+     * 设置报修人电话
+     *
+     * @param userPhone 报修人电话
+     */
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
+    }
+
+    /**
+     * 获取报修人邮箱
+     *
+     * @return user_email - 报修人邮箱
+     */
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    /**
+     * 设置报修人邮箱
+     *
+     * @param userEmail 报修人邮箱
+     */
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     /**

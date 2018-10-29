@@ -55,7 +55,7 @@ public class AdministratorServiceImplTest {
 
     @Test
     public void administratorPhoneNumberIsExist() {
-        boolean result = adminservice.administratorPhoneNumberIsExist("13841547251");
+        boolean result = adminservice.administratorPhoneNumberIsExist("13842512342");
         System.out.println(result);
     }
 
@@ -63,8 +63,8 @@ public class AdministratorServiceImplTest {
     public void saveAdministrator() {
         Administrator admin = new Administrator();
         admin.setAdminName("李四");
-        admin.setAdminPassword("test3456");
-        admin.setAdminPhone("13842512355");
+        admin.setAdminPassword("test13456");
+        admin.setAdminPhone("13842512341");
         admin.setAdminPermission(1);
         adminservice.saveAdministrator(admin);
     }
@@ -72,7 +72,7 @@ public class AdministratorServiceImplTest {
     @Test
     public void updateAdministrator() {
         Administrator admin = new Administrator();
-        admin.setAdminId(2);
+        admin.setAdminId(4);
         admin.setAdminPermission(0);
         adminservice.updateAdministrator(admin);
     }
