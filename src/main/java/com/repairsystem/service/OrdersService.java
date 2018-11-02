@@ -15,31 +15,32 @@ public interface OrdersService {
      * 获取全部维修单
      * @return
      */
-    public List<Orders> searchAllOrder();
+    List<Orders> searchAllOrder();
 
     /**
      * 按照维修单号搜索维修单
      * @param id
      * @return
      */
-    public Orders searchOrderById(Integer id);
+    Orders searchOrderById(Integer id);
 
     /**
      * 添加维修单
-     * @param orders
+     * @param order
      *
      */
-    public void saveOrder(Orders order);
+    void saveOrder(Orders order);
 
     /**
      * 更新维修单
      * @param order
      */
-    public void updateOrder(Orders order);
+    void updateOrder(Orders order);
 
     /**
      * 删除维修单
      * @param id
      */
-    public void deleteOrder(Integer id);
+    void deleteOrder(Integer id);
+
 }

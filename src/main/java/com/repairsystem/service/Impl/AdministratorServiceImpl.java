@@ -2,6 +2,10 @@ package com.repairsystem.service.Impl;
 
 import com.repairsystem.dao.AdministratorMapper;
 import com.repairsystem.entity.Administrator;
+import com.repairsystem.exception.AdministratorIdIsNullException;
+import com.repairsystem.exception.AdministratorNameIsNullException;
+import com.repairsystem.exception.AdministratorPasswordIsNullException;
+import com.repairsystem.exception.AdministratorPhoneIsNullException;
 import com.repairsystem.service.AdministratorService;
 import com.repairsystem.utils.PasswordEncryptionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -33,6 +37,10 @@ public class AdministratorServiceImpl implements AdministratorService {
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public Administrator searchAdministratorById(Integer id) {
+
+        if (StringUtils.isBlank(id.toString())) {
+            throw new AdministratorIdIsNullException("传入的管理员ID为空");
+        }
         return adminMapper.selectByPrimaryKey(id);
     }
 
@@ -40,23 +48,31 @@ public class AdministratorServiceImpl implements AdministratorService {
     @Override
     public List<Administrator> searchAdministratorByName(String name) {
 
-        Administrator admin = new Administrator();
-        admin.setAdminName(name);
+        if (StringUtils.isBlank(name)) {
+            throw new AdministratorNameIsNullException("传入的管理员姓名为空");
+        }
 
-        return adminMapper.select(admin);
+        Example example = new Example(Administrator.class);
+        example.createCriteria().andLike("adminName", "%" + name + "%");
+
+        return adminMapper.selectByExample(example);
     }
 
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
-    public Administrator loginAdministrator(String user,String password) {
+    public Administrator loginAdministrator(String phone, String password) {
 
-        if (StringUtils.isBlank(user) || StringUtils.isBlank(password)) {
-            return null;
+        if (StringUtils.isBlank(phone)) {
+            throw new AdministratorPhoneIsNullException("传入的管理员电话号码为空");
+        }
+
+        if (StringUtils.isBlank(password)) {
+            throw new AdministratorPasswordIsNullException("传入的管理员密码为空");
         }
 
         password = PasswordEncryptionUtils.plainText2MD5Encrypt(password);
         Example example = new Example(Administrator.class);
-        example.createCriteria().andEqualTo("adminPhone",user).andEqualTo("adminPassword",password);
+        example.createCriteria().andEqualTo("adminPhone", phone).andEqualTo("adminPassword", password);
 
         Administrator admin = adminMapper.selectOneByExample(example);
 
@@ -67,6 +83,10 @@ public class AdministratorServiceImpl implements AdministratorService {
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public boolean administratorPhoneNumberIsExist(String number) {
+
+        if (StringUtils.isBlank(number)) {
+            throw new AdministratorPhoneIsNullException("传入的管理员密码为空");
+        }
 
         Administrator admin = new Administrator();
         admin.setAdminPhone(number);
@@ -90,6 +110,10 @@ public class AdministratorServiceImpl implements AdministratorService {
     @Override
     public void updateAdministrator(Administrator admin) {
 
+        if (StringUtils.isBlank(admin.getAdminId().toString())) {
+            throw new AdministratorIdIsNullException("传入的管理员ID为空");
+        }
+
         adminMapper.updateByPrimaryKeySelective(admin);
 
     }
@@ -97,6 +121,9 @@ public class AdministratorServiceImpl implements AdministratorService {
     @Override
     public void deleteAdministrator(Integer id) {
 
+        if (StringUtils.isBlank(id.toString())) {
+            throw new AdministratorIdIsNullException("传入的管理员ID为空");
+        }
         adminMapper.deleteByPrimaryKey(id);
 
     }

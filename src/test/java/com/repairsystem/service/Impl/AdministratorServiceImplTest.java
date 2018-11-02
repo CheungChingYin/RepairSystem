@@ -41,7 +41,7 @@ public class AdministratorServiceImplTest {
 
     @Test
     public void searchAdministratorByName() {
-        List<Administrator> list = adminservice.searchAdministratorByName("李四");
+        List<Administrator> list = adminservice.searchAdministratorByName("李");
         for(Administrator admin:list){
             System.out.println(admin.getAdminPhone());
         }

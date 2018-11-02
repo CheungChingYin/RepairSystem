@@ -41,7 +41,7 @@ public class OrdersServiceImplTest {
     @Test
     public void saveOrder() {
         Orders order = new Orders();
-        order.setProblem("电脑出现问题");
+        order.setProblem("显示屏出现问题");
         order.setComputerNumber(11);
         order.setClassId(4);
         order.setBuildingId(3);
