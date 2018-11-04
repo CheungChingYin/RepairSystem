@@ -21,6 +21,11 @@ public class CompleteOrder {
     private Integer adminId;
 
     /**
+     * 管理员姓名
+     */
+    private String adminName;
+
+    /**
      * 完成时间
      */
     @Column(name = "complete_time")
@@ -76,6 +81,22 @@ public class CompleteOrder {
      */
     public void setAdminId(Integer adminId) {
         this.adminId = adminId;
+    }
+
+    /**
+     * 获取管理员名称
+     * @return
+     */
+    public String getAdminName() {
+        return adminName;
+    }
+
+    /**
+     * 设置管理员名称
+     * @param adminName
+     */
+    public void setAdminName(String adminName) {
+        this.adminName = adminName;
     }
 
     /**
@@ -148,5 +169,18 @@ public class CompleteOrder {
      */
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    @Override
+    public String toString() {
+        return "CompleteOrder{" +
+                "orderId=" + orderId +
+                ", adminId=" + adminId +
+                ", adminName='" + adminName + '\'' +
+                ", completeTime=" + completeTime +
+                ", imagePath='" + imagePath + '\'' +
+                ", problem='" + problem + '\'' +
+                ", remark='" + remark + '\'' +
+                '}';
     }
 }

@@ -17,6 +17,8 @@ public interface AdministratorService {
      */
     List<Administrator> searchAllAdministrator();
 
+
+
     /**
      * 按管理员ID搜索管理员
      * @param id

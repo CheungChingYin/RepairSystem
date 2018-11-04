@@ -124,4 +124,15 @@ public class Administrator {
     public void setAdminPermission(Integer adminPermission) {
         this.adminPermission = adminPermission;
     }
+
+    @Override
+    public String toString() {
+        return "Administrator{" +
+                "adminId=" + adminId +
+                ", adminPassword='" + adminPassword + '\'' +
+                ", adminName='" + adminName + '\'' +
+                ", adminPhone='" + adminPhone + '\'' +
+                ", adminPermission=" + adminPermission +
+                '}';
+    }
 }

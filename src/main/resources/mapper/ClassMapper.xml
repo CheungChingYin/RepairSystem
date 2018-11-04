@@ -1,15 +1,48 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.repairsystem.dao.ClassMapper" >
-  <resultMap id="BaseResultMap" type="com.repairsystem.entity.Class" >
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <id column="class_id" property="classId" jdbcType="INTEGER" />
-    <result column="class_name" property="className" jdbcType="VARCHAR" />
-    <result column="building_id" property="buildingId" jdbcType="INTEGER" />
-    <result column="computer_total" property="computerTotal" jdbcType="INTEGER" />
-    <result column="computer_enable" property="computerEnable" jdbcType="INTEGER" />
-    <result column="computer_disable" property="computerDisable" jdbcType="INTEGER" />
-  </resultMap>
+<mapper namespace="com.repairsystem.dao.ClassMapper">
+    <resultMap id="BaseResultMap" type="com.repairsystem.entity.Class">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="class_id" property="classId" jdbcType="INTEGER"/>
+        <result column="class_name" property="className" jdbcType="VARCHAR"/>
+        <result column="building_id" property="buildingId" jdbcType="INTEGER"/>
+        <result column="computer_total" property="computerTotal" jdbcType="INTEGER"/>
+        <result column="computer_enable" property="computerEnable" jdbcType="INTEGER"/>
+        <result column="computer_disable" property="computerDisable" jdbcType="INTEGER"/>
+        <result column="buildingName" property="buildingName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getAllClass" resultMap="BaseResultMap">
+        SELECT
+          c.*, b.building_name AS buildingName
+        FROM
+          class c,
+          building b
+        WHERE
+          c.building_id = b.building_id
+    </select>
+
+    <select id="getClassById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        SELECT
+            c.*, b.building_name AS buildingName
+        FROM
+            class c,
+            building b
+        WHERE
+            c.building_id = b.building_id
+        AND c.class_id = #{id}
+    </select>
+
+    <select id="getClassByName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT
+          c.*, b.building_name AS buildingName
+        FROM
+          class c,
+          building b
+        WHERE
+          c.building_id = b.building_id
+        AND c.class_name LIKE "%"#{name}"%"
+    </select>
 </mapper>

@@ -25,10 +25,20 @@ public class Orders {
     private Integer classId;
 
     /**
+     * 所属实训室名称
+     */
+    private String className;
+
+    /**
      * 所属实训楼ID
      */
     @Column(name = "building_id")
     private Integer buildingId;
+
+    /**
+     * 所属实训楼名称
+     */
+    private String buildingName;
 
     /**
      * 状态
@@ -58,6 +68,11 @@ public class Orders {
      */
     @Column(name = "admin_id")
     private Integer adminId;
+
+    /**
+     * 接收管理员名称
+     */
+    private String adminName;
 
     /**
      * 报修人名称
@@ -137,6 +152,22 @@ public class Orders {
     }
 
     /**
+     * 获得所属实训室名称
+     * @return
+     */
+    public String getClassName() {
+        return className;
+    }
+
+    /**
+     * 设置所属实训室名称
+     * @param className
+     */
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    /**
      * 获取所属实训楼ID
      *
      * @return building_id - 所属实训楼ID
@@ -152,6 +183,22 @@ public class Orders {
      */
     public void setBuildingId(Integer buildingId) {
         this.buildingId = buildingId;
+    }
+
+    /**
+     * 获得所属实训楼名称
+     * @return
+     */
+    public String getBuildingName() {
+        return buildingName;
+    }
+
+    /**
+     * 设置所属实训楼名称
+     * @param buildingName
+     */
+    public void setBuildingName(String buildingName) {
+        this.buildingName = buildingName;
     }
 
     /**
@@ -245,6 +292,22 @@ public class Orders {
     }
 
     /**
+     * 获得接收管理员名称
+     * @return adminName
+     */
+    public String getAdminName() {
+        return adminName;
+    }
+
+    /**
+     * 设置接手管理员名称
+     * @param adminName
+     */
+    public void setAdminName(String adminName) {
+        this.adminName = adminName;
+    }
+
+    /**
      * 获取报修人名称
      *
      * @return user_name - 报修人名称
@@ -314,5 +377,27 @@ public class Orders {
      */
     public void setProblem(String problem) {
         this.problem = problem;
+    }
+
+    @Override
+    public String toString() {
+        return "Orders{" +
+                "orderId=" + orderId +
+                ", computerNumber=" + computerNumber +
+                ", classId=" + classId +
+                ", className='" + className + '\'' +
+                ", buildingId=" + buildingId +
+                ", buildingName='" + buildingName + '\'' +
+                ", status=" + status +
+                ", submitTime=" + submitTime +
+                ", completeTime=" + completeTime +
+                ", imagesPath='" + imagesPath + '\'' +
+                ", adminId=" + adminId +
+                ", adminName='" + adminName + '\'' +
+                ", userName='" + userName + '\'' +
+                ", userPhone='" + userPhone + '\'' +
+                ", userEmail='" + userEmail + '\'' +
+                ", problem='" + problem + '\'' +
+                '}';
     }
 }

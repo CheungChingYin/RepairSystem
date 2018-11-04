@@ -2,6 +2,7 @@ package com.repairsystem.service.Impl;
 
 import com.repairsystem.dao.ClassMapper;
 import com.repairsystem.entity.Class;
+import com.repairsystem.entity.vo.ClassVO;
 import com.repairsystem.exception.ClassIdIsNullException;
 import com.repairsystem.exception.ClassNameIsNullException;
 import com.repairsystem.service.ClassService;
@@ -28,7 +29,7 @@ public class ClassServiceImpl implements ClassService {
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public List<Class> searchAllClass() {
-        return classMapper.selectAll();
+        return classMapper.getAllClass();
     }
 
     @Transactional(propagation = Propagation.SUPPORTS)
@@ -38,7 +39,7 @@ public class ClassServiceImpl implements ClassService {
         if (StringUtils.isBlank(id.toString())) {
             throw new ClassIdIsNullException("传入的实训室ID为空");
         }
-        return classMapper.selectByPrimaryKey(id);
+        return classMapper.getClassById(id);
     }
 
     @Transactional(propagation = Propagation.SUPPORTS)
@@ -47,9 +48,8 @@ public class ClassServiceImpl implements ClassService {
         if (StringUtils.isBlank(name)) {
             throw new ClassNameIsNullException("传入的实训室名称为空");
         }
-        Example example = new Example(Class.class);
-        example.createCriteria().andLike("className", "%" + name + "%");
-        return classMapper.selectByExample(example);
+
+        return classMapper.getClassByName(name);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)

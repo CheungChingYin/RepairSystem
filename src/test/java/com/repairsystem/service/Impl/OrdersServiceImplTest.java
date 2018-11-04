@@ -2,6 +2,7 @@ package com.repairsystem.service.Impl;
 
 import com.repairsystem.RepairsystemApplication;
 import com.repairsystem.entity.Orders;
+import com.repairsystem.entity.vo.OrderVO;
 import com.repairsystem.service.OrdersService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,14 +29,14 @@ public class OrdersServiceImplTest {
     public void searchAllOrder() {
         List<Orders> list = ordersService.searchAllOrder();
         for(Orders order:list){
-            System.out.println(order.getUserName());
+            System.out.println(order.toString());
         }
     }
 
     @Test
     public void searchOrderById() {
         Orders orders = ordersService.searchOrderById(2);
-        System.out.println(orders.getUserName());
+        System.out.println(orders.toString());
     }
 
     @Test

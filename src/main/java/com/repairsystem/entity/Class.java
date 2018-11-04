@@ -24,6 +24,11 @@ public class Class {
     private Integer buildingId;
 
     /**
+     * 所属教学楼名称
+     */
+    private String buildingName;
+
+    /**
      * 电脑总数
      */
     @Column(name = "computer_total")
@@ -40,6 +45,7 @@ public class Class {
      */
     @Column(name = "computer_disable")
     private Integer computerDisable;
+
 
     /**
      * 获取实训室ID
@@ -96,6 +102,22 @@ public class Class {
     }
 
     /**
+     * 获得教学楼名称
+     * @return
+     */
+    public String getBuildingName() {
+        return buildingName;
+    }
+
+    /**
+     * 设置教学楼名称
+     * @param buildingName
+     */
+    public void setBuildingName(String buildingName) {
+        this.buildingName = buildingName;
+    }
+
+    /**
      * 获取电脑总数
      *
      * @return computer_total - 电脑总数
@@ -147,5 +169,18 @@ public class Class {
      */
     public void setComputerDisable(Integer computerDisable) {
         this.computerDisable = computerDisable;
+    }
+
+    @Override
+    public String toString() {
+        return "Class{" +
+                "classId=" + classId +
+                ", className='" + className + '\'' +
+                ", buildingId=" + buildingId +
+                ", buildingName='" + buildingName + '\'' +
+                ", computerTotal=" + computerTotal +
+                ", computerEnable=" + computerEnable +
+                ", computerDisable=" + computerDisable +
+                '}';
     }
 }

@@ -29,9 +29,8 @@ public class CompleteOrderServiceImpl implements CompleteOrderService {
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public List<CompleteOrder> searchAllCompleteOrder() {
-        Example example = new Example(CompleteOrder.class);
-        example.orderBy("completeTime").desc();
-        return completeOrderMapper.selectByExample(example);
+
+        return completeOrderMapper.getAllCompleteOrder();
     }
 
     @Transactional(propagation = Propagation.SUPPORTS)
@@ -41,7 +40,7 @@ public class CompleteOrderServiceImpl implements CompleteOrderService {
         if(StringUtils.isBlank(id.toString())){
             throw new CompleteOrderIdIsNullException("传入的完成表单ID不能为空");
         }
-        return completeOrderMapper.selectByPrimaryKey(id);
+        return completeOrderMapper.getCompleteOrderById(id);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)

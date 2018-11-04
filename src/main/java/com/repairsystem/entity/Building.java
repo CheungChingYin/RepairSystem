@@ -52,4 +52,12 @@ public class Building {
     public void setBuildingName(String buildingName) {
         this.buildingName = buildingName;
     }
+
+    @Override
+    public String toString() {
+        return "Building{" +
+                "buildingId=" + buildingId +
+                ", buildingName='" + buildingName + '\'' +
+                '}';
+    }
 }

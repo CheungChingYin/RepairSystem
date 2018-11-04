@@ -29,21 +29,21 @@ public class AdministratorServiceImplTest {
     public void searchAllAdministrator() {
         List<Administrator> list = adminservice.searchAllAdministrator();
         for(Administrator admin : list){
-            System.out.println(admin.getAdminName());
+            System.out.println(admin.toString());
         }
     }
 
     @Test
     public void searchAdministratorById() {
         Administrator admin = adminservice.searchAdministratorById(2);
-        System.out.println(admin.getAdminName());
+        System.out.println(admin.toString());
     }
 
     @Test
     public void searchAdministratorByName() {
         List<Administrator> list = adminservice.searchAdministratorByName("李");
         for(Administrator admin:list){
-            System.out.println(admin.getAdminPhone());
+            System.out.println(admin.toString());
         }
     }
 

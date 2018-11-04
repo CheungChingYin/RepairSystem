@@ -36,14 +36,14 @@ public class CompleteOrderServiceImplTest {
 
         List<CompleteOrder> list = completeOrderService.searchAllCompleteOrder();
         for (CompleteOrder completeOrder : list){
-            System.out.println(completeOrder.getProblem());
+            System.out.println(completeOrder.toString());
         }
     }
 
     @Test
     public void searchCompleteOrderById() {
         CompleteOrder completeOrder = completeOrderService.searchCompleteOrderById(2);
-        System.out.println(completeOrder.getProblem());
+        System.out.println(completeOrder.toString());
     }
 
     @Test

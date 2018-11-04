@@ -2,6 +2,7 @@ package com.repairsystem.service.Impl;
 
 import com.repairsystem.dao.OrdersMapper;
 import com.repairsystem.entity.Orders;
+import com.repairsystem.entity.vo.OrderVO;
 import com.repairsystem.exception.OrderIdIsNullException;
 import com.repairsystem.service.OrdersService;
 import org.apache.commons.lang3.StringUtils;
@@ -29,9 +30,7 @@ public class OrdersServiceImpl implements OrdersService {
     @Override
     public List<Orders> searchAllOrder() {
 
-        Example example = new Example(Orders.class);
-        example.orderBy("submitTime").desc();
-        return ordersMapper.selectByExample(example);
+       return ordersMapper.getAllOrder();
     }
 
     @Transactional(propagation = Propagation.SUPPORTS)
@@ -41,7 +40,7 @@ public class OrdersServiceImpl implements OrdersService {
         if (StringUtils.isBlank(id.toString())) {
             throw new OrderIdIsNullException("传入的订单ID为空");
         }
-        return ordersMapper.selectByPrimaryKey(id);
+        return ordersMapper.getOrderById(id);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)

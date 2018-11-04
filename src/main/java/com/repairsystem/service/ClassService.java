@@ -1,6 +1,7 @@
 package com.repairsystem.service;
 
 import com.repairsystem.entity.Class;
+import com.repairsystem.entity.vo.ClassVO;
 
 import java.util.List;
 

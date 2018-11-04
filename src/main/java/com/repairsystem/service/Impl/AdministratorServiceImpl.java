@@ -32,6 +32,7 @@ public class AdministratorServiceImpl implements AdministratorService {
     @Override
     public List<Administrator> searchAllAdministrator() {
         return adminMapper.selectAll();
+
     }
 
     @Transactional(propagation = Propagation.SUPPORTS)
@@ -53,7 +54,7 @@ public class AdministratorServiceImpl implements AdministratorService {
         }
 
         Example example = new Example(Administrator.class);
-        example.createCriteria().andLike("adminName", "%" + name + "%");
+        example.createCriteria().andLike("adminName","%"+name+"%");
 
         return adminMapper.selectByExample(example);
     }

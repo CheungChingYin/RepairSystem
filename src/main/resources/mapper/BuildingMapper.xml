@@ -8,4 +8,5 @@
     <id column="building_id" property="buildingId" jdbcType="INTEGER" />
     <result column="building_name" property="buildingName" jdbcType="VARCHAR" />
   </resultMap>
+
 </mapper>

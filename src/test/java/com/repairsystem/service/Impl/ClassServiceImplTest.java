@@ -3,6 +3,7 @@ package com.repairsystem.service.Impl;
 import com.repairsystem.RepairsystemApplication;
 import com.repairsystem.dao.ClassMapper;
 import com.repairsystem.entity.Class;
+import com.repairsystem.entity.vo.ClassVO;
 import com.repairsystem.service.ClassService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,21 +32,21 @@ public class ClassServiceImplTest {
 
         List<Class> list = classService.searchAllClass();
         for(Class classes:list){
-            System.out.println(classes.getClassName());
+            System.out.println(classes.toString());
         }
     }
 
     @Test
     public void searchClassById() {
         Class c = classService.searchClassById(2);
-        System.out.println(c.getClassName());
+        System.out.println(c.toString());
     }
 
     @Test
     public void searchClassByName() {
         List<Class> list = classService.searchClassByName("B");
         for(Class c : list){
-            System.out.println(c.getClassName());
+            System.out.println(c.toString());
         }
     }
 

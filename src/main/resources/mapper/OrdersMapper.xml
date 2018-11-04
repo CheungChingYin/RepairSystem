@@ -1,22 +1,61 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.repairsystem.dao.OrdersMapper" >
-  <resultMap id="BaseResultMap" type="com.repairsystem.entity.Orders" >
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <id column="order_id" property="orderId" jdbcType="INTEGER" />
-    <result column="computer_number" property="computerNumber" jdbcType="INTEGER" />
-    <result column="class_id" property="classId" jdbcType="INTEGER" />
-    <result column="building_id" property="buildingId" jdbcType="INTEGER" />
-    <result column="status" property="status" jdbcType="INTEGER" />
-    <result column="submit_time" property="submitTime" jdbcType="TIMESTAMP" />
-    <result column="complete_time" property="completeTime" jdbcType="TIMESTAMP" />
-    <result column="images_path" property="imagesPath" jdbcType="VARCHAR" />
-    <result column="admin_id" property="adminId" jdbcType="INTEGER" />
-    <result column="user_name" property="userName" jdbcType="VARCHAR" />
-    <result column="user_phone" property="userPhone" jdbcType="CHAR" />
-    <result column="user_email" property="userEmail" jdbcType="VARCHAR" />
-    <result column="problem" property="problem" jdbcType="LONGVARCHAR" />
-  </resultMap>
+<mapper namespace="com.repairsystem.dao.OrdersMapper">
+    <resultMap id="BaseResultMap" type="com.repairsystem.entity.Orders">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="order_id" property="orderId" jdbcType="INTEGER"/>
+        <result column="computer_number" property="computerNumber" jdbcType="INTEGER"/>
+        <result column="class_id" property="classId" jdbcType="INTEGER"/>
+        <result column="className" property="className" jdbcType="VARCHAR"/>
+        <result column="building_id" property="buildingId" jdbcType="INTEGER"/>
+        <result column="buildingName" property="buildingName" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="submit_time" property="submitTime" jdbcType="TIMESTAMP"/>
+        <result column="complete_time" property="completeTime" jdbcType="TIMESTAMP"/>
+        <result column="images_path" property="imagesPath" jdbcType="VARCHAR"/>
+        <result column="admin_id" property="adminId" jdbcType="INTEGER"/>
+        <result column="adminName" property="adminName" jdbcType="VARCHAR"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="user_phone" property="userPhone" jdbcType="CHAR"/>
+        <result column="user_email" property="userEmail" jdbcType="VARCHAR"/>
+        <result column="problem" property="problem" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+
+    <select id="getAllOrder" resultMap="BaseResultMap">
+        SELECT
+            o.*,c.class_name AS className,
+            b.building_name AS buildingName,
+            a.admin_name AS adminName
+        FROM
+            orders o,
+            class c,
+            building b,
+            administrator a
+        WHERE
+            o.class_id = c.class_id
+        AND o.building_id = b.building_id AND
+         o.admin_id = a.admin_id
+        ORDER BY o.submit_time DESC
+    </select>
+
+    <select id="getOrderById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        SELECT
+            o.*, c.class_name AS className,
+            b.building_name AS buildingName,
+            a.admin_name AS adminName
+        FROM
+            orders o,
+            class c,
+            building b,
+            administrator a
+        WHERE
+            o.class_id = c.class_id
+        AND o.building_id = b.building_id
+        AND o.admin_id = a.admin_id
+        AND o.order_id = 3
+        ORDER BY
+            o.submit_time DESC
+    </select>
 </mapper>
