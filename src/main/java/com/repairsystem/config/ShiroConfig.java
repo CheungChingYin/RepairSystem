@@ -41,7 +41,7 @@ public class ShiroConfig {
         // LinkedHashMap 是有序的，进行顺序拦截器配置
         Map<String,String> filterChainMap = new LinkedHashMap<String, String>();
 
-        // 配置可以匿名访问的地址，可以根据实际情况自己添加，放行一些静态资源等，anon 表示放行
+        // TODO 配置可以匿名访问的地址，可以根据实际情况自己添加，放行一些静态资源等，anon 表示放行
         filterChainMap.put("/css/**", "anon");
         filterChainMap.put("/imgs/**", "anon");
         filterChainMap.put("/js/**", "anon");
@@ -50,13 +50,14 @@ public class ShiroConfig {
         filterChainMap.put("/swagger-ui.html/**", "anon");
         // 登录 URL 放行
         filterChainMap.put("/login", "anon");
+        filterChainMap.put("/admin/**","anon");
 
         // 以“/user/admin” 开头的用户需要身份认证，authc 表示要进行身份认证
-        filterChainMap.put("/user/admin*", "authc");
+//        filterChainMap.put("/user/admin*", "authc");
         // “/user/student” 开头的用户需要角色认证，是“admin”才允许
-        filterChainMap.put("/user/student*/**", "roles[admin]");
+//        filterChainMap.put("/user/student*/**", "roles[admin]");
         // “/user/teacher” 开头的用户需要权限认证，是“user:create”才允许
-        filterChainMap.put("/user/teacher*/**", "perms[\"user:create\"]");
+//        filterChainMap.put("/user/teacher*/**", "perms[\"user:create\"]");
 
         // 配置 logout 过滤器
         filterChainMap.put("/logout", "logout");
