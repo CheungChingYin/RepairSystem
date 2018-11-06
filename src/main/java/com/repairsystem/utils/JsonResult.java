@@ -4,53 +4,65 @@ package com.repairsystem.utils;
  * @author CheungChingYin
  * @date 2018/10/28
  * @time 15:10
+ * @Description: 自定义响应数据结构
+ * 门户接受此类数据后需要使用本类的方法转换成对于的数据类型格式（类，或者list）
+ * 其他自行处理
+ * 200：表示成功
+ * 500：表示错误，错误信息在msg字段中
+ * 501：bean验证错误，不管多少个错误都以map形式返回
+ * 502：拦截器拦截到用户token出错
+ * 555：异常抛出信息
  */
-public class JsonResult<T> {
+public class JsonResult {
 
-    private T data;
-    private Integer code;
+    //响应业务状态
+    private Integer status;
+
+    //响应消息
     private String msg;
 
-    /**
-     * 若没有返回数据，默认状态码为200，提示操作成功
-     */
+    //响应中的数据
+    private Object data;
+
     public JsonResult(){
-        this.code = 200;
-        this.msg = "操作成功";
+
     }
 
-    /**
-     * 没有返回数据，人为指定状态码和提示信息
-     * @param code
-     * @param mes
-     */
-    public JsonResult(Integer code, String mes) {
-        this.code = code;
-        this.msg = mes;
-    }
-
-    /**
-     * 有数据返回，状态码为200，默认提示操作成功
-     * @param data
-     */
-    public JsonResult(T data) {
+    public JsonResult(Object data) {
         this.data = data;
-        this.code = 200;
-        this.msg = "操作成功";
     }
 
-    /**
-     * 有数据返回，人为提示信息
-     * @param data
-     * @param msg
-     */
-    public JsonResult(T data, String msg) {
-        this.data = data;
+    public JsonResult(Integer status, String msg, Object data) {
+        this.status = status;
         this.msg = msg;
+        this.data = data;
     }
 
-    /**
-     * 缺少异常处理
-     */
+    public JsonResult build(Integer status, String msg, Object data) {
+        return new JsonResult(status, msg, data);
+    }
 
+    public static JsonResult ok(){
+        return new JsonResult(null);
+    }
+
+    public static JsonResult ok(Object data){
+        return new JsonResult(data);
+    }
+
+    public static JsonResult errorMsg(String msg){
+        return new JsonResult(500,msg,null);
+    }
+
+    public static JsonResult errorMap(Object data){
+        return new JsonResult(501,"BeanError",data);
+    }
+
+    public static JsonResult errorTokenMsg(String msg){
+        return new JsonResult(502,msg,null);
+    }
+
+    public static JsonResult errorException(String msg){
+        return new JsonResult(555,msg,null);
+    }
 }

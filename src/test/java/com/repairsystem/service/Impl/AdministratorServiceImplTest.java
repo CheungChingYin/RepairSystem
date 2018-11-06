@@ -50,7 +50,7 @@ public class AdministratorServiceImplTest {
     @Test
     public void loginAdministrator() {
         Administrator admin = adminservice.loginAdministrator("13841547255","test123456");
-        System.out.println(admin.getAdminName()+";"+admin.getAdminPermission());
+        System.out.println(admin.getAdminName()+";"+admin.getRoleId());
     }
 
     @Test
@@ -65,7 +65,7 @@ public class AdministratorServiceImplTest {
         admin.setAdminName("李四");
         admin.setAdminPassword("test13456");
         admin.setAdminPhone("13842512341");
-        admin.setAdminPermission(1);
+        admin.setRoleId(1);
         adminservice.saveAdministrator(admin);
     }
 
@@ -73,12 +73,18 @@ public class AdministratorServiceImplTest {
     public void updateAdministrator() {
         Administrator admin = new Administrator();
         admin.setAdminId(4);
-        admin.setAdminPermission(0);
+        admin.setRoleId(0);
         adminservice.updateAdministrator(admin);
     }
 
     @Test
     public void deleteAdministrator() {
         adminservice.deleteAdministrator(3);
+    }
+
+    @Test
+    public void searchAdministratorByPhoneNum() {
+        Administrator admin = adminservice.searchAdministratorByPhoneNum("13841547255");
+        System.out.println(admin.toString());
     }
 }

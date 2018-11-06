@@ -32,8 +32,8 @@ public class Administrator {
     /**
      * 管理员权限
      */
-    @Column(name = "admin_permission")
-    private Integer adminPermission;
+    @Column(name = "role_id")
+    private Integer roleId;
 
     /**
      * 获取管理员ID
@@ -110,19 +110,19 @@ public class Administrator {
     /**
      * 获取管理员权限
      *
-     * @return admin_permission - 管理员权限
+     * @return role_id - 管理员权限
      */
-    public Integer getAdminPermission() {
-        return adminPermission;
+    public Integer getRoleId() {
+        return roleId;
     }
 
     /**
      * 设置管理员权限
      *
-     * @param adminPermission 管理员权限
+     * @param roleId 管理员权限
      */
-    public void setAdminPermission(Integer adminPermission) {
-        this.adminPermission = adminPermission;
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
     @Override
@@ -132,7 +132,7 @@ public class Administrator {
                 ", adminPassword='" + adminPassword + '\'' +
                 ", adminName='" + adminName + '\'' +
                 ", adminPhone='" + adminPhone + '\'' +
-                ", adminPermission=" + adminPermission +
+                ", roleId=" + roleId +
                 '}';
     }
 }

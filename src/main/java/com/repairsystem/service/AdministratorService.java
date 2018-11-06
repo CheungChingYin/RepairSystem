@@ -34,6 +34,13 @@ public interface AdministratorService {
     List<Administrator> searchAdministratorByName(String name);
 
     /**
+     * 按照手机号搜索管理员
+     * @param phoneNum
+     * @return
+     */
+    Administrator searchAdministratorByPhoneNum(String phoneNum);
+
+    /**
      * 管理员登录
      * @param phone
      * @param password

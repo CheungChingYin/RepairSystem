@@ -61,6 +61,14 @@ public class AdministratorServiceImpl implements AdministratorService {
 
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
+    public Administrator searchAdministratorByPhoneNum(String phoneNum) {
+        Example example = new Example(Administrator.class);
+        example.createCriteria().andEqualTo("adminPhone",phoneNum);
+        return adminMapper.selectOneByExample(example);
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
     public Administrator loginAdministrator(String phone, String password) {
 
         if (StringUtils.isBlank(phone)) {
