@@ -27,4 +27,13 @@ public interface ConstantUtils {
          */
         public static final Integer REPAIRED = 2;
     }
+
+    public static class Page{
+
+        //一页展示多少条
+        public static final Integer PAGESIZE = 10;
+
+        //页码展示数量
+        public static final Integer PAGESNUM = 4;
+    }
 }

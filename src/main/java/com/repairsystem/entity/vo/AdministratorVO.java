@@ -9,7 +9,8 @@ public class AdministratorVO {
 
     private Integer adminId;
     private String adminName;
-    private Integer adminPermission;
+    private String adminPhone;
+    private Integer roleId;
 
     public Integer getAdminId() {
         return adminId;
@@ -27,12 +28,20 @@ public class AdministratorVO {
         this.adminName = adminName;
     }
 
-    public Integer getAdminPermission() {
-        return adminPermission;
+    public String getAdminPhone() {
+        return adminPhone;
     }
 
-    public void setAdminPermission(Integer adminPermission) {
-        this.adminPermission = adminPermission;
+    public void setAdminPhone(String adminPhone) {
+        this.adminPhone = adminPhone;
+    }
+
+    public Integer getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
     @Override
@@ -40,7 +49,8 @@ public class AdministratorVO {
         return "AdministratorVO{" +
                 "adminId=" + adminId +
                 ", adminName='" + adminName + '\'' +
-                ", adminPermission=" + adminPermission +
+                ", adminPhone='" + adminPhone + '\'' +
+                ", roleId=" + roleId +
                 '}';
     }
 }

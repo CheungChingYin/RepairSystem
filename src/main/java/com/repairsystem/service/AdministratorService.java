@@ -17,6 +17,8 @@ public interface AdministratorService {
      */
     List<Administrator> searchAllAdministrator();
 
+    String countAllAdministrator();
+
 
 
     /**

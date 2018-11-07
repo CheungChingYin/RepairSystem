@@ -37,6 +37,15 @@ public class AdministratorServiceImpl implements AdministratorService {
 
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
+    public String countAllAdministrator() {
+
+        String count = adminMapper.getAdministratorCount().toString();
+
+        return count;
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
     public Administrator searchAdministratorById(Integer id) {
 
         if (StringUtils.isBlank(id.toString())) {

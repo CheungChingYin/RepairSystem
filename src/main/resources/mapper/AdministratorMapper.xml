@@ -11,4 +11,8 @@
     <result column="admin_phone" property="adminPhone" jdbcType="CHAR" />
     <result column="role_id" property="roleId" jdbcType="INTEGER" />
   </resultMap>
+
+  <select id="getAdministratorCount" resultType="java.lang.Integer">
+    SELECT COUNT(*) FROM administrator
+  </select>
 </mapper>
