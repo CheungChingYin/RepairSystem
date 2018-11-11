@@ -1,20 +1,26 @@
 package com.repairsystem.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 
+@ApiModel(value = "实训楼对象",description = "这是实训楼对象")
 public class Building {
     /**
      * 实训楼ID
      */
     @Id
     @Column(name = "building_id")
+    @ApiModelProperty(value = "实训楼ID",name = "buildingId",example = "1",required = true)
     private Integer buildingId;
 
     /**
      * 实训楼名称
      */
     @Column(name = "building_name")
+    @ApiModelProperty(value = "实训楼名称",name = "buildingName",example = "实训楼A",required = true)
     private String buildingName;
 
     /**

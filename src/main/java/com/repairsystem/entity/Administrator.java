@@ -1,39 +1,55 @@
 package com.repairsystem.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 
+@ApiModel(value = "管理员对象", description = "这是管理员对象")
 public class Administrator {
     /**
      * 管理员ID
      */
     @Id
     @Column(name = "admin_id")
+    @ApiModelProperty(value = "管理员ID", name = "adminId", example = "1", required = true)
     private Integer adminId;
 
     /**
      * 管理员密码
      */
     @Column(name = "admin_password")
+    @ApiModelProperty(value = "管理员密码", name = "adminPassword", example = "test123456", required = true)
     private String adminPassword;
 
     /**
      * 管理员姓名
      */
     @Column(name = "admin_name")
+    @ApiModelProperty(value = "管理员姓名", name = "adminName", example = "李四", required = true)
     private String adminName;
 
     /**
      * 管理员电话
      */
     @Column(name = "admin_phone")
+    @ApiModelProperty(value = "管理员电话", name = "adminPhone", example = "13283497593", required = true)
     private String adminPhone;
 
     /**
      * 管理员权限
      */
     @Column(name = "role_id")
+    @ApiModelProperty(value = "管理员权限", name = "roleId", example = "0", required = true)
     private Integer roleId;
+
+    /**
+     * 管理员邮箱
+     */
+    @Column(name = "admin_email")
+    @ApiModelProperty(value = "管理员邮箱", name = "adminEmail", example = "test@gmail.com", required = true)
+    private String adminEmail;
 
     /**
      * 获取管理员ID
@@ -125,6 +141,24 @@ public class Administrator {
         this.roleId = roleId;
     }
 
+    /**
+     * 获取管理员邮箱
+     *
+     * @return admin_email - 管理员邮箱
+     */
+    public String getAdminEmail() {
+        return adminEmail;
+    }
+
+    /**
+     * 设置管理员邮箱
+     *
+     * @param adminEmail 管理员邮箱
+     */
+    public void setAdminEmail(String adminEmail) {
+        this.adminEmail = adminEmail;
+    }
+
     @Override
     public String toString() {
         return "Administrator{" +
@@ -133,6 +167,7 @@ public class Administrator {
                 ", adminName='" + adminName + '\'' +
                 ", adminPhone='" + adminPhone + '\'' +
                 ", roleId=" + roleId +
+                ", adminEmail='" + adminEmail + '\'' +
                 '}';
     }
 }

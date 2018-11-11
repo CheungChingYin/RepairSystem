@@ -1,49 +1,60 @@
 package com.repairsystem.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 
+@ApiModel(value = "实训室对象", description = "这个是实训室对象")
 public class Class {
     /**
      * 实训室ID
      */
     @Id
     @Column(name = "class_id")
+    @ApiModelProperty(value = "实训室ID", name = "classId", example = "1", required = true)
     private Integer classId;
 
     /**
      * 实训室名称
      */
     @Column(name = "class_name")
+    @ApiModelProperty(value = "实训室名称", name = "className", example = "A101", required = true)
     private String className;
 
     /**
      * 所属实训楼
      */
     @Column(name = "building_id")
+    @ApiModelProperty(value = "所属实训楼ID", name = "buildingId", example = "1", required = true)
     private Integer buildingId;
 
     /**
      * 所属教学楼名称
      */
+    @ApiModelProperty(hidden = true)
     private String buildingName;
 
     /**
      * 电脑总数
      */
     @Column(name = "computer_total")
+    @ApiModelProperty(value = "实训室电脑总数", name = "computerTotal", example = "60")
     private Integer computerTotal;
 
     /**
      * 可用电脑总数
      */
     @Column(name = "computer_enable")
+    @ApiModelProperty(value = "实训室可用电脑数", name = "computerEnable", example = "50")
     private Integer computerEnable;
 
     /**
      * 不可用电脑总数
      */
     @Column(name = "computer_disable")
+    @ApiModelProperty(value = "实训室不可用电脑数", name = "computerDisable", example = "10")
     private Integer computerDisable;
 
 
@@ -103,6 +114,7 @@ public class Class {
 
     /**
      * 获得教学楼名称
+     *
      * @return
      */
     public String getBuildingName() {
@@ -111,6 +123,7 @@ public class Class {
 
     /**
      * 设置教学楼名称
+     *
      * @param buildingName
      */
     public void setBuildingName(String buildingName) {

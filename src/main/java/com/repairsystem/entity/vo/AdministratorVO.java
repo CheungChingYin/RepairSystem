@@ -11,6 +11,7 @@ public class AdministratorVO {
     private String adminName;
     private String adminPhone;
     private Integer roleId;
+    private String adminEmail;
 
     public Integer getAdminId() {
         return adminId;
@@ -44,6 +45,14 @@ public class AdministratorVO {
         this.roleId = roleId;
     }
 
+    public String getAdminEmail() {
+        return adminEmail;
+    }
+
+    public void setAdminEmail(String adminEmail) {
+        this.adminEmail = adminEmail;
+    }
+
     @Override
     public String toString() {
         return "AdministratorVO{" +
@@ -51,6 +60,7 @@ public class AdministratorVO {
                 ", adminName='" + adminName + '\'' +
                 ", adminPhone='" + adminPhone + '\'' +
                 ", roleId=" + roleId +
+                ", adminEmail='" + adminEmail + '\'' +
                 '}';
     }
 }

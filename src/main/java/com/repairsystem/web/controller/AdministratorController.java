@@ -7,10 +7,7 @@ import com.repairsystem.exception.AdministratorIdIsNullException;
 import com.repairsystem.exception.PageIsNullException;
 import com.repairsystem.service.AdministratorService;
 import com.repairsystem.utils.*;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.*;
 import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
@@ -96,5 +93,34 @@ public class AdministratorController {
         map.put("pageMap",pageMap);
         map.put("Info",adminVO);
         return JsonResult.ok(map);
+    }
+
+    @ApiOperation(value = "保存管理员信息")
+    @PostMapping("/saveAdministratorInfo")
+    public  JsonResult saveAdministratorInfo(@RequestBody Administrator admin){
+
+        adminService.saveAdministrator(admin);
+        return JsonResult.ok();
+    }
+
+    @ApiOperation(value = "修改管理员信息")
+    @PostMapping("updateAdministratorInfo")
+    public JsonResult updateAdministratorInfo(@RequestBody Administrator admin){
+        if (StringUtils.isBlank(admin.getAdminId().toString())){
+            return JsonResult.errorMsg("删除失败，传来的管理员ID不能为空");
+        }
+        adminService.updateAdministrator(admin);
+        return JsonResult.ok();
+    }
+
+    @ApiOperation(value = "删除管理员信息")
+    @GetMapping("deleteAdministratorInfo")
+    @ApiImplicitParam(name = "adminId",value = "管理员ID",required = true,dataType = "Integer",paramType = "query")
+    public JsonResult deleteAdministratorInfo(Integer adminId){
+        if (StringUtils.isBlank(adminId.toString())){
+            return JsonResult.errorMsg("删除失败，传入的管理员ID不能为空");
+        }
+        adminService.deleteAdministrator(adminId);
+        return JsonResult.ok();
     }
 }

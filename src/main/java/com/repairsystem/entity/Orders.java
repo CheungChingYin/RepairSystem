@@ -1,5 +1,7 @@
 package com.repairsystem.entity;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import java.util.Date;
@@ -10,79 +12,93 @@ public class Orders {
      */
     @Id
     @Column(name = "order_id")
+    @ApiModelProperty(value = "维修工单ID", name = "orderId", required = true)
     private Integer orderId;
 
     /**
      * 电脑序号
      */
     @Column(name = "computer_number")
+    @ApiModelProperty(value = "出现问题的电脑编号", name = "computerNumber", example = "1", required = true)
     private Integer computerNumber;
 
     /**
      * 所属教室ID
      */
     @Column(name = "class_id")
+    @ApiModelProperty(value = "所属实训室ID", name = "classId", example = "1", required = true)
     private Integer classId;
 
     /**
      * 所属实训室名称
      */
+    @ApiModelProperty(hidden = true)
     private String className;
 
     /**
      * 所属实训楼ID
      */
     @Column(name = "building_id")
+    @ApiModelProperty(value = "所属实训楼ID",name = "buildingId",example = "1",required = true)
     private Integer buildingId;
 
     /**
      * 所属实训楼名称
      */
+    @ApiModelProperty(hidden = true)
     private String buildingName;
 
     /**
-     * 状态
+     * 维修状态
      */
+    @ApiModelProperty(value = "维修状态",name = "status",example = "0",required = true)
     private Integer status;
 
     /**
      * 提交时间
      */
     @Column(name = "submit_time")
+    @ApiModelProperty(hidden = true)
     private Date submitTime;
 
     /**
      * 完成时间
      */
     @Column(name = "complete_time")
+    @ApiModelProperty(hidden = true)
     private Date completeTime;
 
     /**
      * 故障图片上传
      */
     @Column(name = "images_path")
+    @ApiModelProperty(value = "故障图片",name = "imagesPath")
     private String imagesPath;
 
     /**
      * 接手管理员ID
      */
     @Column(name = "admin_id")
+    @ApiModelProperty(value = "经手管理员ID",name = "adminId",example = "1",required = true)
     private Integer adminId;
 
     /**
      * 接收管理员名称
      */
+    @ApiModelProperty(hidden = true)
     private String adminName;
 
     /**
      * 报修人名称
      */
+    @ApiModelProperty(hidden = true)
     @Column(name = "user_name")
     private String userName;
 
     /**
      * 报修人电话
      */
+    @ApiModelProperty(value = "报修人电话号码" ,name = "userPhone",example = "13525874610",required = true)
     @Column(name = "user_phone")
     private String userPhone;
 
@@ -90,11 +106,13 @@ public class Orders {
      * 报修人邮箱
      */
     @Column(name = "user_email")
+    @ApiModelProperty(value = "报修人邮箱",name = "userEmail",example = "user@abc.com",required = true)
     private String userEmail;
 
     /**
      * 工单问题
      */
+    @ApiModelProperty(value = "维修工单问题",name = "problem",example = "电脑出现问题",required = true)
     private String problem;
 
     /**
@@ -153,6 +171,7 @@ public class Orders {
 
     /**
      * 获得所属实训室名称
+     *
      * @return
      */
     public String getClassName() {
@@ -161,6 +180,7 @@ public class Orders {
 
     /**
      * 设置所属实训室名称
+     *
      * @param className
      */
     public void setClassName(String className) {
@@ -187,6 +207,7 @@ public class Orders {
 
     /**
      * 获得所属实训楼名称
+     *
      * @return
      */
     public String getBuildingName() {
@@ -195,6 +216,7 @@ public class Orders {
 
     /**
      * 设置所属实训楼名称
+     *
      * @param buildingName
      */
     public void setBuildingName(String buildingName) {
@@ -293,6 +315,7 @@ public class Orders {
 
     /**
      * 获得接收管理员名称
+     *
      * @return adminName
      */
     public String getAdminName() {
@@ -301,6 +324,7 @@ public class Orders {
 
     /**
      * 设置接手管理员名称
+     *
      * @param adminName
      */
     public void setAdminName(String adminName) {

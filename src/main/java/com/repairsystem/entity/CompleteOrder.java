@@ -1,10 +1,14 @@
 package com.repairsystem.entity;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
-
+@ApiModel(value = "完成工单对象",description = "这是完成工单对象")
 @Table(name = "complete_order")
 public class CompleteOrder {
     /**
@@ -12,39 +16,46 @@ public class CompleteOrder {
      */
     @Id
     @Column(name = "order_id")
+    @ApiModelProperty(value = "完成工单ID",name = "orderId")
     private Integer orderId;
 
     /**
      * 管理员ID
      */
     @Column(name = "admin_id")
+    @ApiModelProperty(value = "管理员ID",name = "adminName",example = "1",required = true)
     private Integer adminId;
 
     /**
      * 管理员姓名
      */
+    @ApiModelProperty(hidden = true)
     private String adminName;
 
     /**
      * 完成时间
      */
     @Column(name = "complete_time")
+    @ApiModelProperty(hidden = true)
     private Date completeTime;
 
     /**
      * 故障图片
      */
     @Column(name = "image_path")
+    @ApiModelProperty(value = "上传图片路径")
     private String imagePath;
 
     /**
      * 工单问题
      */
+    @ApiModelProperty(value = "工单问题",name = "problem",example = "电脑出现问题",required = true)
     private String problem;
 
     /**
      * 记录
      */
+    @ApiModelProperty(value = "解决问题记录",name = "remark",example = "电脑解决问题")
     private String remark;
 
     /**

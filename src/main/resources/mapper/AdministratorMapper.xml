@@ -10,6 +10,7 @@
     <result column="admin_name" property="adminName" jdbcType="VARCHAR" />
     <result column="admin_phone" property="adminPhone" jdbcType="CHAR" />
     <result column="role_id" property="roleId" jdbcType="INTEGER" />
+    <result column="admin_email" property="adminEmail" jdbcType="VARCHAR" />
   </resultMap>
 
   <select id="getAdministratorCount" resultType="java.lang.Integer">
