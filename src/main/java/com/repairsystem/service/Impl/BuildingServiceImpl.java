@@ -54,6 +54,11 @@ public class BuildingServiceImpl implements BuildingService {
         return buildingMapper.selectByExample(example);
     }
 
+    @Override
+    public Integer getBuildingCount() {
+        return buildingMapper.getBuildingCount();
+    }
+
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void savBuilding(Building building) {

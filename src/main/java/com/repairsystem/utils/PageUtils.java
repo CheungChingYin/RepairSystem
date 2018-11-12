@@ -26,6 +26,7 @@ public class PageUtils {
         map.put("prePage",prePage);
         map.put("nextPage",nextPage);
         map.put("pages",pages);
+        map.put("count",tempCount);
         map.put("pageList",pageList);
         return map;
     }

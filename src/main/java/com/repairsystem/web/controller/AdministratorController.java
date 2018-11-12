@@ -8,14 +8,11 @@ import com.repairsystem.exception.PageIsNullException;
 import com.repairsystem.service.AdministratorService;
 import com.repairsystem.utils.*;
 import io.swagger.annotations.*;
-import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -95,6 +92,32 @@ public class AdministratorController {
         return JsonResult.ok(map);
     }
 
+    @ApiOperation(value = "通过管理员名称获得管理员信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", value = "当前页", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "adminName", value = "实训楼ID", required = true, dataType = "String", paramType = "query")
+    })
+    @GetMapping("/getAdminInfoByName")
+    public JsonResult getAdminInfoByName(String page,String adminName){
+        if(StringUtils.isBlank(page)){
+            return JsonResult.errorMsg("传入当前页page参数不能为空");
+        }
+        if(StringUtils.isBlank(adminName)){
+            return JsonResult.errorMsg("传入管理员名称adminName参数不能为空");
+        }
+        PageHelper.startPage(Integer.parseInt(page),ConstantUtils.Page.PAGESIZE);
+        List<Administrator> adminList = adminService.searchAdministratorByName(adminName);
+
+        Map<String, Object> pageMap = PageUtils.pageHandler(page, adminList.size()+"");
+        List<AdministratorVO> listVO = Entity2VO.entityList2VOList(adminList, AdministratorVO.class);
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("pageMap", pageMap);
+        map.put("Info", listVO);
+        return JsonResult.ok(map);
+
+    }
+
     @ApiOperation(value = "保存管理员信息")
     @PostMapping("/saveAdministratorInfo")
     public  JsonResult saveAdministratorInfo(@RequestBody Administrator admin){
@@ -107,7 +130,7 @@ public class AdministratorController {
     @PostMapping("updateAdministratorInfo")
     public JsonResult updateAdministratorInfo(@RequestBody Administrator admin){
         if (StringUtils.isBlank(admin.getAdminId().toString())){
-            return JsonResult.errorMsg("删除失败，传来的管理员ID不能为空");
+            return JsonResult.errorMsg("删除失败，传入的管理员ID不能为空");
         }
         adminService.updateAdministrator(admin);
         return JsonResult.ok();

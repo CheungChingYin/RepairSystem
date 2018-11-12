@@ -32,6 +32,12 @@ public interface BuildingService {
     List<Building> searchBuildingByName(String name);
 
     /**
+     * 获得
+     * @return
+     */
+    Integer getBuildingCount();
+
+    /**
      * 保存教学楼信息
      * @param building
      */

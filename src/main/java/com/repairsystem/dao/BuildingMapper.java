@@ -5,4 +5,5 @@ import com.repairsystem.utils.MyMapper;
 
 public interface BuildingMapper extends MyMapper<Building> {
 
+    Integer getBuildingCount();
 }

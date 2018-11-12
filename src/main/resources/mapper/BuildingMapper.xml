@@ -9,4 +9,7 @@
     <result column="building_name" property="buildingName" jdbcType="VARCHAR" />
   </resultMap>
 
+  <select id="getBuildingCount" resultType="java.lang.Integer">
+    SELECT COUNT(*) FROM building
+  </select>
 </mapper>
