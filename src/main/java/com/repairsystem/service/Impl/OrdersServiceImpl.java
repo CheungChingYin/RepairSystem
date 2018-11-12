@@ -43,6 +43,12 @@ public class OrdersServiceImpl implements OrdersService {
         return ordersMapper.getOrderById(id);
     }
 
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public Integer getOrderCount() {
+        return ordersMapper.getOrdersCount();
+    }
+
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void saveOrder(Orders order) {
@@ -50,14 +56,14 @@ public class OrdersServiceImpl implements OrdersService {
         ordersMapper.insertSelective(order);
     }
 
-    @Transactional(propagation = Propagation.SUPPORTS)
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void updateOrder(Orders order) {
 
         ordersMapper.updateByPrimaryKeySelective(order);
     }
 
-    @Transactional(propagation = Propagation.SUPPORTS)
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void deleteOrder(Integer id) {
 

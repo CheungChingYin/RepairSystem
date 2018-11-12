@@ -32,6 +32,8 @@ public interface ClassService {
      */
     List<Class> searchClassByName(String name);
 
+    Integer getClassCount();
+
     /**
      * 保存机房信息
      * @param classes
@@ -60,6 +62,6 @@ public interface ClassService {
      * 减少实训室可用电脑
      * @param id
      */
-    void reduceCompleteEnable(Integer id);
+    void reduceComputerEnable(Integer id);
 
 }

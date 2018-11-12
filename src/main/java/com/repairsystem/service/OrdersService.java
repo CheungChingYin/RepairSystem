@@ -25,6 +25,8 @@ public interface OrdersService {
      */
     Orders searchOrderById(Integer id);
 
+    Integer getOrderCount();
+
     /**
      * 添加维修单
      * @param order

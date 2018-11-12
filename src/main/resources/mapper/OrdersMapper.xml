@@ -25,19 +25,16 @@
 
     <select id="getAllOrder" resultMap="BaseResultMap">
         SELECT
-            o.*,c.class_name AS className,
+            o.*, c.class_name AS className,
             b.building_name AS buildingName,
             a.admin_name AS adminName
         FROM
-            orders o,
-            class c,
-            building b,
-            administrator a
-        WHERE
-            o.class_id = c.class_id
-        AND o.building_id = b.building_id AND
-         o.admin_id = a.admin_id
-        ORDER BY o.submit_time DESC
+            orders AS o
+        LEFT JOIN class AS c ON c.class_id = o.class_id
+        LEFT JOIN building AS b ON b.building_id = o.building_id
+        LEFT JOIN administrator AS a ON a.admin_id = o.admin_id
+        ORDER BY
+            o.submit_time DESC
     </select>
 
     <select id="getOrderById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
@@ -46,16 +43,16 @@
             b.building_name AS buildingName,
             a.admin_name AS adminName
         FROM
-            orders o,
-            class c,
-            building b,
-            administrator a
-        WHERE
-            o.class_id = c.class_id
-        AND o.building_id = b.building_id
-        AND o.admin_id = a.admin_id
-        AND o.order_id = 3
+            orders AS o
+        LEFT JOIN class AS c ON c.class_id = o.class_id
+        LEFT JOIN building AS b ON b.building_id = o.building_id
+        LEFT JOIN administrator AS a ON a.admin_id = o.admin_id
+        WHERE o.order_id = #{odrderId}
         ORDER BY
             o.submit_time DESC
+    </select>
+
+    <select id="getOrdersCount" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM orders
     </select>
 </mapper>

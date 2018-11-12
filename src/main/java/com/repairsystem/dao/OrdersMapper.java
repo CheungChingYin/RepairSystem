@@ -10,4 +10,5 @@ public interface OrdersMapper extends MyMapper<Orders> {
 
     List<Orders> getAllOrder();
     Orders getOrderById(Integer odrderId);
+    Integer getOrdersCount();
 }

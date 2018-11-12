@@ -54,6 +54,7 @@ public class BuildingServiceImpl implements BuildingService {
         return buildingMapper.selectByExample(example);
     }
 
+    @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public Integer getBuildingCount() {
         return buildingMapper.getBuildingCount();
@@ -65,7 +66,7 @@ public class BuildingServiceImpl implements BuildingService {
         buildingMapper.insert(building);
     }
 
-    @Transactional(propagation = Propagation.SUPPORTS)
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void updateBuilding(Building building) {
 
@@ -75,7 +76,7 @@ public class BuildingServiceImpl implements BuildingService {
         buildingMapper.updateByPrimaryKeySelective(building);
     }
 
-    @Transactional(propagation = Propagation.SUPPORTS)
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void deleteBuilding(Integer id) {
 

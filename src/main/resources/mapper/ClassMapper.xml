@@ -22,6 +22,9 @@
           building b
         WHERE
           c.building_id = b.building_id
+        ORDER BY
+          b.building_id,
+          c.class_name
     </select>
 
     <select id="getClassById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
@@ -33,6 +36,9 @@
         WHERE
             c.building_id = b.building_id
         AND c.class_id = #{id}
+        ORDER BY
+          b.building_id,
+          c.class_name
     </select>
 
     <select id="getClassByName" resultMap="BaseResultMap" parameterType="java.lang.String">
@@ -44,5 +50,12 @@
         WHERE
           c.building_id = b.building_id
         AND c.class_name LIKE "%"#{name}"%"
+        ORDER BY
+          b.building_id,
+          c.class_name
     </select>
+
+    <select id="getClassCount" resultType="java.lang.Integer">
+    SELECT COUNT(*) FROM class
+  </select>
 </mapper>

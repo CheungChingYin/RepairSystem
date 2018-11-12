@@ -13,4 +13,6 @@ public interface ClassMapper extends MyMapper<Class> {
     Class getClassById(Integer id);
 
     List<Class> getClassByName(String name);
+
+    Integer getClassCount();
 }

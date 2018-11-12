@@ -1,5 +1,7 @@
 package com.repairsystem.entity.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 /**
@@ -13,6 +15,7 @@ public class CompleteOrderVO {
     private String problem;
     private String remark;
     private String adminName;
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date completeTime;
     private String imagePath;
 

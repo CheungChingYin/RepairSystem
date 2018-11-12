@@ -82,6 +82,6 @@ public class ClassServiceImplTest {
     @Test
     public void reduceCompleteEnable(){
 
-        classService.reduceCompleteEnable(7);
+        classService.reduceComputerEnable(7);
     }
 }

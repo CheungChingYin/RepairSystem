@@ -52,13 +52,19 @@ public class ClassServiceImpl implements ClassService {
         return classMapper.getClassByName(name);
     }
 
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public Integer getClassCount() {
+        return classMapper.getClassCount();
+    }
+
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void saveClass(Class classes) {
-        classMapper.insert(classes);
+        classMapper.insertSelective(classes);
     }
 
-    @Transactional(propagation = Propagation.SUPPORTS)
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void updateClass(Class classes) {
         if (StringUtils.isBlank(classes.getClassId().toString())) {
@@ -68,7 +74,7 @@ public class ClassServiceImpl implements ClassService {
 
     }
 
-    @Transactional(propagation = Propagation.SUPPORTS)
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void deleteClass(Integer id) {
         if (StringUtils.isBlank(id.toString())) {
@@ -77,10 +83,11 @@ public class ClassServiceImpl implements ClassService {
         classMapper.deleteByPrimaryKey(id);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void increaseComputerEnable(Integer classId) {
 
-        Class classes = classMapper.selectByPrimaryKey(classId);
+        Class classes = classMapper.getClassById(classId);
         Integer computerEnable = classes.getComputerEnable() + 1;
         Integer computerDisable = classes.getComputerDisable() - 1;
         classes.setComputerEnable(computerEnable);
@@ -88,12 +95,14 @@ public class ClassServiceImpl implements ClassService {
         classMapper.updateByPrimaryKeySelective(classes);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
-    public void reduceCompleteEnable(Integer classId) {
+    public void reduceComputerEnable(Integer classId) {
 
-        Class classes = classMapper.selectByPrimaryKey(classId);
+        Class classes = classMapper.getClassById(classId);
         Integer computerEnable = classes.getComputerEnable() - 1;
         Integer computerDisable = classes.getComputerDisable() + 1;
+        classes.setBuildingName(null);
         classes.setComputerEnable(computerEnable);
         classes.setComputerDisable(computerDisable);
         classMapper.updateByPrimaryKeySelective(classes);

@@ -1,5 +1,6 @@
 package com.repairsystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.Column;
@@ -58,6 +59,7 @@ public class Orders {
      * 提交时间
      */
     @Column(name = "submit_time")
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(hidden = true)
     private Date submitTime;
 
@@ -65,6 +67,7 @@ public class Orders {
      * 完成时间
      */
     @Column(name = "complete_time")
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(hidden = true)
     private Date completeTime;
 
@@ -91,7 +94,7 @@ public class Orders {
     /**
      * 报修人名称
      */
-    @ApiModelProperty(hidden = true)
+    @ApiModelProperty(value = "报修人名称",name = "userName",example = "王翠花",required = true)
     @Column(name = "user_name")
     private String userName;
 

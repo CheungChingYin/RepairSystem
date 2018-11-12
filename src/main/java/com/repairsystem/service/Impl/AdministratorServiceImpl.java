@@ -125,6 +125,7 @@ public class AdministratorServiceImpl implements AdministratorService {
         adminMapper.insert(admin);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void updateAdministrator(Administrator admin) {
 
@@ -136,6 +137,7 @@ public class AdministratorServiceImpl implements AdministratorService {
 
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void deleteAdministrator(Integer id) {
 

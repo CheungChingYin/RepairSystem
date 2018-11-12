@@ -23,8 +23,8 @@ import java.util.Map;
  * @date 2018/11/11
  * @time 21:44
  */
-@RestController()
-@Api(value = "实训楼业务相关接口", tags = {"实训楼业务相关接口",})
+@RestController
+@Api(value = "实训楼业务相关接口", tags = {"实训楼业务相关接口"})
 @RequestMapping("/building")
 public class BuildingController {
 
