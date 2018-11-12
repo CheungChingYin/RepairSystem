@@ -1,7 +1,6 @@
 package com.repairsystem.web.controller;
 
 import com.github.pagehelper.PageHelper;
-import com.repairsystem.dao.ClassMapper;
 import com.repairsystem.entity.Class;
 import com.repairsystem.entity.vo.ClassVO;
 import com.repairsystem.service.ClassService;
@@ -59,7 +58,7 @@ public class ClassController {
     @ApiOperation(value = "通过实训室ID获得实训室信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "page", value = "当前页", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "classId", value = "实训室ID", required = true, dataType = "Integer", paramType = "query")
+            @ApiImplicitParam(name = "classId", value = "实训室ID", required = true, dataType = "String", paramType = "query")
     })
     @GetMapping("/getClassInfoById")
     public JsonResult getClassInfoById(String page, Integer classId) {
@@ -129,10 +128,10 @@ public class ClassController {
     }
 
     @ApiOperation("删除班级信息")
-    @ApiImplicitParam(name = "classId", value = "实训室ID", required = true, dataType = "Integer", paramType = "query")
+    @ApiImplicitParam(name = "classId", value = "实训室ID", required = true, dataType = "String", paramType = "query")
     @GetMapping("/deleteClassInfo")
     public JsonResult deleteClassInfo(Integer classId) {
-        if(StringUtils.isBlank(classId.toString())){
+        if (StringUtils.isBlank(classId.toString())) {
             return JsonResult.errorMsg("传入的班级ID(classId)不能为空");
         }
         classService.deleteClass(classId);

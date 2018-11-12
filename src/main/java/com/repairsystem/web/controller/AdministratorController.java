@@ -32,8 +32,13 @@ public class AdministratorController {
     private AdministratorService adminService;
 
     @ApiOperation(value = "管理员登录", notes = "管理员登录验证")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "adminPhoneNum", value = "管理员手机", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "adminPassword", value = "管理员密码", required = true, dataType = "String", paramType = "query")
+
+    })
     @PostMapping("/login")
-    public JsonResult login(@ApiParam("管理员手机") @RequestParam String adminPhoneNum, @ApiParam("管理员密码") @RequestParam String adminPassword) {
+    public JsonResult login(String adminPhoneNum, String adminPassword) {
         if (StringUtils.isBlank(adminPhoneNum)) {
             return JsonResult.errorMsg("输入的管理员手机号不能为空");
         }
@@ -50,8 +55,9 @@ public class AdministratorController {
     }
 
     @ApiOperation(value = "获得全部管理员资料")
+    @ApiImplicitParam(name = "page", value = "当前页", required = true, dataType = "String", paramType = "query")
     @GetMapping("/getAllAdminInfo")
-    public JsonResult getAllAdminInfo(@ApiParam("当前页数") @RequestParam(required = true) String page) {
+    public JsonResult getAllAdminInfo(String page) {
 
         if (StringUtils.isBlank(page)) {
             throw new PageIsNullException();
@@ -73,22 +79,26 @@ public class AdministratorController {
     }
 
     @ApiOperation(value = "通过管理员ID获得管理员信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", value = "当前页", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "id", value = "管理员ID", required = true, dataType = "String", paramType = "query")
+    })
     @GetMapping("/getAdminInfoById")
-    public JsonResult getAdminInfoById(@ApiParam("管理员ID") @RequestParam Integer id, @ApiParam("当前页") @RequestParam String page) {
+    public JsonResult getAdminInfoById(String page, Integer id) {
         if (StringUtils.isBlank(id.toString())) {
             throw new AdministratorIdIsNullException("传入的管理员ID为空");
         }
         if (StringUtils.isBlank(page)) {
             throw new PageIsNullException();
         }
-        PageHelper.startPage(Integer.parseInt(page),ConstantUtils.Page.PAGESIZE);
+        PageHelper.startPage(Integer.parseInt(page), ConstantUtils.Page.PAGESIZE);
         Administrator admin = adminService.searchAdministratorById(id);
 
         AdministratorVO adminVO = Entity2VO.entity2VO(admin, AdministratorVO.class);
-        Map<String, Object> pageMap = PageUtils.pageHandler(page,"1");
-        Map<String,Object> map = new HashMap<String, Object>();
-        map.put("pageMap",pageMap);
-        map.put("Info",adminVO);
+        Map<String, Object> pageMap = PageUtils.pageHandler(page, "1");
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("pageMap", pageMap);
+        map.put("Info", adminVO);
         return JsonResult.ok(map);
     }
 
@@ -98,17 +108,17 @@ public class AdministratorController {
             @ApiImplicitParam(name = "adminName", value = "实训楼ID", required = true, dataType = "String", paramType = "query")
     })
     @GetMapping("/getAdminInfoByName")
-    public JsonResult getAdminInfoByName(String page,String adminName){
-        if(StringUtils.isBlank(page)){
+    public JsonResult getAdminInfoByName(String page, String adminName) {
+        if (StringUtils.isBlank(page)) {
             return JsonResult.errorMsg("传入当前页page参数不能为空");
         }
-        if(StringUtils.isBlank(adminName)){
+        if (StringUtils.isBlank(adminName)) {
             return JsonResult.errorMsg("传入管理员名称adminName参数不能为空");
         }
-        PageHelper.startPage(Integer.parseInt(page),ConstantUtils.Page.PAGESIZE);
+        PageHelper.startPage(Integer.parseInt(page), ConstantUtils.Page.PAGESIZE);
         List<Administrator> adminList = adminService.searchAdministratorByName(adminName);
 
-        Map<String, Object> pageMap = PageUtils.pageHandler(page, adminList.size()+"");
+        Map<String, Object> pageMap = PageUtils.pageHandler(page, adminList.size() + "");
         List<AdministratorVO> listVO = Entity2VO.entityList2VOList(adminList, AdministratorVO.class);
 
         Map<String, Object> map = new HashMap<String, Object>();
@@ -120,7 +130,7 @@ public class AdministratorController {
 
     @ApiOperation(value = "保存管理员信息")
     @PostMapping("/saveAdministratorInfo")
-    public  JsonResult saveAdministratorInfo(@RequestBody Administrator admin){
+    public JsonResult saveAdministratorInfo(@RequestBody Administrator admin) {
 
         adminService.saveAdministrator(admin);
         return JsonResult.ok();
@@ -128,8 +138,8 @@ public class AdministratorController {
 
     @ApiOperation(value = "修改管理员信息")
     @PostMapping("updateAdministratorInfo")
-    public JsonResult updateAdministratorInfo(@RequestBody Administrator admin){
-        if (StringUtils.isBlank(admin.getAdminId().toString())){
+    public JsonResult updateAdministratorInfo(@RequestBody Administrator admin) {
+        if (StringUtils.isBlank(admin.getAdminId().toString())) {
             return JsonResult.errorMsg("删除失败，传入的管理员ID不能为空");
         }
         adminService.updateAdministrator(admin);
@@ -138,9 +148,9 @@ public class AdministratorController {
 
     @ApiOperation(value = "删除管理员信息")
     @GetMapping("deleteAdministratorInfo")
-    @ApiImplicitParam(name = "adminId",value = "管理员ID",required = true,dataType = "Integer",paramType = "query")
-    public JsonResult deleteAdministratorInfo(Integer adminId){
-        if (StringUtils.isBlank(adminId.toString())){
+    @ApiImplicitParam(name = "adminId", value = "管理员ID", required = true, dataType = "String", paramType = "query")
+    public JsonResult deleteAdministratorInfo(Integer adminId) {
+        if (StringUtils.isBlank(adminId.toString())) {
             return JsonResult.errorMsg("删除失败，传入的管理员ID不能为空");
         }
         adminService.deleteAdministrator(adminId);

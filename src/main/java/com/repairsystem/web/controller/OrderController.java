@@ -61,7 +61,7 @@ public class OrderController {
     @ApiOperation(value = "通过维修工单ID获得工单信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "page", value = "当前页", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "orderId", value = "维修工单ID", required = true, dataType = "Integer", paramType = "query")
+            @ApiImplicitParam(name = "orderId", value = "维修工单ID", required = true, dataType = "String", paramType = "query")
     })
     @GetMapping("/getOrdersInfoById")
     public JsonResult getOrdersInfoById(String page, Integer orderId) {
@@ -85,8 +85,8 @@ public class OrderController {
 
     @ApiOperation(value = "保存维修工单")
     @PostMapping("/saveOrders")
-    public JsonResult saveOrders(@RequestBody Orders orders){
-        if(StringUtils.isBlank(orders.getClassId().toString())){
+    public JsonResult saveOrders(@RequestBody Orders orders) {
+        if (StringUtils.isBlank(orders.getClassId().toString())) {
             JsonResult.errorMsg("传入的实训室ID(classId)不能为空");
         }
         orders.setSubmitTime(new Date());

@@ -53,7 +53,7 @@ public class BuildingController {
     @ApiOperation(value = "通过实训楼ID获得实训楼信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "page", value = "当前页", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "buildingId", value = "实训楼ID", required = true, dataType = "Integer", paramType = "query")
+            @ApiImplicitParam(name = "buildingId", value = "实训楼ID", required = true, dataType = "String", paramType = "query")
 
     })
     @GetMapping("/getBuildingInfoById")
@@ -119,7 +119,7 @@ public class BuildingController {
     }
 
     @ApiOperation("删除实训楼信息")
-    @ApiImplicitParam(name = "buildingId", value = "实训楼ID", required = true, dataType = "Integer", paramType = "query")
+    @ApiImplicitParam(name = "buildingId", value = "实训楼ID", required = true, dataType = "String", paramType = "query")
     @GetMapping("/deleteBuildingInfo")
     public JsonResult deleteBuildingInfo(Integer buildingId){
         buildingService.deleteBuilding(buildingId);
