@@ -36,4 +36,11 @@ public interface ConstantUtils {
         //页码展示数量
         public static final Integer PAGESNUM = 4;
     }
+
+    public static class Path{
+
+        //虚拟目录地址
+        public static final String DIRPATH = "E:/Images";
+
+    }
 }

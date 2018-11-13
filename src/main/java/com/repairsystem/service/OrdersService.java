@@ -25,6 +25,10 @@ public interface OrdersService {
      */
     Orders searchOrderById(Integer id);
 
+    /**
+     * 获得工单总数量
+     * @return
+     */
     Integer getOrderCount();
 
     /**

@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -83,5 +85,12 @@ public class ClassServiceImplTest {
     public void reduceCompleteEnable(){
 
         classService.reduceComputerEnable(7);
+    }
+
+    @Test
+    public void testes(){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd&HH:mm:ss");
+        String time = simpleDateFormat.format(new Date());
+        System.out.println(time);
     }
 }

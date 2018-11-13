@@ -5,22 +5,19 @@ import com.repairsystem.entity.Orders;
 import com.repairsystem.entity.vo.OrderVO;
 import com.repairsystem.service.ClassService;
 import com.repairsystem.service.OrdersService;
-import com.repairsystem.utils.ConstantUtils;
-import com.repairsystem.utils.Entity2VO;
-import com.repairsystem.utils.JsonResult;
-import com.repairsystem.utils.PageUtils;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import com.repairsystem.utils.*;
+import com.sun.xml.internal.bind.v2.TODO;
+import io.swagger.annotations.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 /**
  * @author CheungChingYin
@@ -54,7 +51,7 @@ public class OrderController {
 
         Map<String, Object> resultMap = new HashMap<String, Object>();
         resultMap.put("pageMap", pageMap);
-        resultMap.put("Info", listOrder);
+        resultMap.put("Info", listVO);
         return JsonResult.ok(resultMap);
     }
 
@@ -84,14 +81,68 @@ public class OrderController {
     }
 
     @ApiOperation(value = "保存维修工单")
-    @PostMapping("/saveOrders")
-    public JsonResult saveOrders(@RequestBody Orders orders) {
-        if (StringUtils.isBlank(orders.getClassId().toString())) {
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "problem", value = "维修工单问题", required = true, dataType = "String", paramType = "form"),
+            @ApiImplicitParam(name = "computerNumber", value = "维修电脑编号", required = true, dataType = "String", paramType = "form"),
+            @ApiImplicitParam(name = "classId", value = "所属实训室编号", required = true, dataType = "String", paramType = "form"),
+            @ApiImplicitParam(name = "buildingId", value = "所属实训楼编号", required = true, dataType = "String", paramType = "form"),
+            @ApiImplicitParam(name = "userName", value = "报修人名称", required = true, dataType = "String", paramType = "form"),
+            @ApiImplicitParam(name = "userPhone", value = "报修人电话", required = true, dataType = "String", paramType = "form"),
+            @ApiImplicitParam(name = "userEmail", value = "报修人邮箱", required = true, dataType = "String", paramType = "form"),
+    })
+    @PostMapping(value = "/saveOrders")
+    public JsonResult saveOrders(String problem, Integer computerNumber, Integer classId, Integer buildingId, String userName, String userPhone, String userEmail, @ApiParam(value = "图片上传") MultipartFile file) {
+        if (StringUtils.isBlank(classId.toString())) {
             JsonResult.errorMsg("传入的实训室ID(classId)不能为空");
         }
+        Orders orders = new Orders();
+        //TODO 缺少图片上传
+        if (!file.isEmpty()) {
+            //TODO 上传图片
+            String dbPath = null;
+            Map<String,String> map = OrderUploadUtils.upLoadOrderImage(file,userName);
+            if (map.get("success") != null){
+                dbPath = map.get("success");
+            }else{
+                return JsonResult.errorMsg(map.get("failure"));
+            }
+            orders.setImagesPath(dbPath);
+        }
+
+        orders.setProblem(problem);
+        orders.setComputerNumber(computerNumber);
+        orders.setClassId(classId);
+        orders.setBuildingId(buildingId);
+        orders.setStatus(0);//刚提交维修工单状态是未维修状态0
+        orders.setUserName(userName);
+        orders.setUserPhone(userPhone);
+        orders.setUserEmail(userEmail);
         orders.setSubmitTime(new Date());
+
         ordersService.saveOrder(orders);
         classService.reduceComputerEnable(orders.getClassId());
         return JsonResult.ok();
     }
+
+    @ApiOperation(value = "修改维修工单")
+    @PostMapping("/updateOrders")
+    public JsonResult updateOrders(@RequestBody Orders orders) {
+        if (StringUtils.isBlank(orders.getOrderId().toString())) {
+            return JsonResult.errorMsg("传入的维修工单ID(orderId)不能为空");
+        }
+        ordersService.updateOrder(orders);
+        return JsonResult.ok();
+    }
+
+    @ApiOperation(value = "删除维修工单")
+    @ApiImplicitParam(name = "orderId", value = "维修工单ID", required = true, dataType = "String", paramType = "query")
+    @GetMapping("/deleteOrders")
+    public JsonResult deleteOrders(Integer orderId) {
+        if (StringUtils.isBlank(orderId.toString())) {
+            return JsonResult.errorMsg("传入的维修工单ID(orderId)不能为空");
+        }
+        ordersService.deleteOrder(orderId);
+        return JsonResult.ok();
+    }
+    // TODO 缺少维修完成接口,接受任务接口
 }
