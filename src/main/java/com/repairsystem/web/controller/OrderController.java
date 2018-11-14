@@ -1,9 +1,11 @@
 package com.repairsystem.web.controller;
 
 import com.github.pagehelper.PageHelper;
+import com.repairsystem.entity.CompleteOrder;
 import com.repairsystem.entity.Orders;
 import com.repairsystem.entity.vo.OrderVO;
 import com.repairsystem.service.ClassService;
+import com.repairsystem.service.CompleteOrderService;
 import com.repairsystem.service.OrdersService;
 import com.repairsystem.utils.*;
 import com.sun.xml.internal.bind.v2.TODO;
@@ -34,6 +36,9 @@ public class OrderController {
 
     @Autowired
     private ClassService classService;
+
+    @Autowired
+    private CompleteOrderService completeOrderService;
 
     @ApiOperation(value = "获得所有维修工单信息")
     @ApiImplicitParam(name = "page", value = "当前页", required = true, dataType = "String", paramType = "query")
@@ -96,9 +101,7 @@ public class OrderController {
             JsonResult.errorMsg("传入的实训室ID(classId)不能为空");
         }
         Orders orders = new Orders();
-        //TODO 缺少图片上传
         if (!file.isEmpty()) {
-            //TODO 上传图片
             String dbPath = null;
             Map<String,String> map = OrderUploadUtils.upLoadOrderImage(file,userName);
             if (map.get("success") != null){
@@ -145,4 +148,45 @@ public class OrderController {
         return JsonResult.ok();
     }
     // TODO 缺少维修完成接口,接受任务接口
+
+    @ApiOperation(value = "接受维修工单")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "orderId", value = "维修工单ID", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "adminId",value = "接受维修工单管理员ID",required = true,dataType = "String", paramType = "query"),
+    })
+    @GetMapping("/receiveOrder")
+    public JsonResult receiveOrder(Integer orderId,Integer adminId){
+        Orders order = new Orders();
+        order.setOrderId(orderId);
+        order.setAdminId(adminId);
+        order.setStatus(1);
+        ordersService.updateOrder(order);
+        return JsonResult.ok();
+    }
+
+    @ApiOperation(value = "完成维修工单")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "orderId", value = "维修工单ID", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "remark",value = "维修备注",dataType = "Long",paramType = "query")
+    })
+
+    @PostMapping("/orderComplete")
+    public JsonResult orderComplete(Integer orderId,String remark){
+        if (StringUtils.isBlank(orderId.toString())){
+            return JsonResult.errorMsg("传入的维修工单ID(orderId)不能为空");
+        }
+        Orders order = ordersService.searchOrderById(orderId);
+        CompleteOrder completeOrder = Entity2VO.entity2VO(order,CompleteOrder.class);
+        if(StringUtils.isNoneBlank(remark)){
+            completeOrder.setRemark(remark);
+        }
+        completeOrder.setImagePath(order.getImagesPath());
+        completeOrder.setCompleteTime(new Date());
+        completeOrder.setAdminName(null);
+
+        completeOrderService.saveCompleteOrder(completeOrder);
+        ordersService.deleteOrder(orderId);
+        return JsonResult.ok();
+
+    }
 }
