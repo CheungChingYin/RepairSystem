@@ -38,4 +38,20 @@
             co.complete_time DESC
     </select>
 
+    <select id="getCompleteOrderCount" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM complete_order
+    </select>
+
+    <select id="getCompleteOrderByKeyWord" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT
+            co.*, a.admin_name AS adminName
+        FROM
+            complete_order AS co
+        LEFT JOIN administrator AS a ON co.admin_id = a.admin_id
+        WHERE
+            co.problem LIKE "%"#{keyWord}"%"
+        ORDER BY
+            co.complete_time DESC
+    </select>
+
 </mapper>

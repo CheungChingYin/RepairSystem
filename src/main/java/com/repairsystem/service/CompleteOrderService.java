@@ -19,11 +19,24 @@ public interface CompleteOrderService {
     List<CompleteOrder> searchAllCompleteOrder();
 
     /**
+     * 获取完成维修表单数量
+     * @return
+     */
+    Integer getCompleteOrderCount();
+
+    /**
      * 通过表单Id获取表单信息
      * @param id
      * @return
      */
     CompleteOrder searchCompleteOrderById(Integer id);
+
+    /**
+     * 通过关键字搜索完成维修工单
+     * @param keyWord
+     * @return
+     */
+    List<CompleteOrder> searchCompleteOrderByKeyWord(String keyWord);
 
     /**
      * 保存已完成表单信息

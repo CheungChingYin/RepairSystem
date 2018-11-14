@@ -147,7 +147,6 @@ public class OrderController {
         ordersService.deleteOrder(orderId);
         return JsonResult.ok();
     }
-    // TODO 缺少维修完成接口,接受任务接口
 
     @ApiOperation(value = "接受维修工单")
     @ApiImplicitParams({

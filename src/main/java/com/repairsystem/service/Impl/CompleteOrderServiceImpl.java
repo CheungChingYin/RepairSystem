@@ -43,6 +43,18 @@ public class CompleteOrderServiceImpl implements CompleteOrderService {
         return completeOrderMapper.getCompleteOrderById(id);
     }
 
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public Integer getCompleteOrderCount() {
+        return completeOrderMapper.getCompleteOrderCount();
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public List<CompleteOrder> searchCompleteOrderByKeyWord(String keyWord) {
+        return completeOrderMapper.getCompleteOrderByKeyWord(keyWord);
+    }
+
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void saveCompleteOrder(CompleteOrder completeOrder) {
