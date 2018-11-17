@@ -50,7 +50,6 @@ public class AdministratorController {
         UsernamePasswordToken token = new UsernamePasswordToken(adminPhoneNum, adminPassword);
         Subject subject = SecurityUtils.getSubject();
         subject.login(token);
-        //TODO 设置Redis免登陆
         return JsonResult.ok();
     }
 

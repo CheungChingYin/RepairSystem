@@ -1,4 +1,4 @@
-package com.repairsystem.realm;
+package com.repairsystem.config.shiro;
 
 import com.repairsystem.entity.Administrator;
 import com.repairsystem.entity.Role;
@@ -10,6 +10,7 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.Resource;
 import java.util.HashSet;
@@ -21,13 +22,16 @@ import java.util.Set;
  * @date 2018/11/4
  * @time 21:29
  */
-public class AdminRealm extends AuthorizingRealm {
+public class MyShiroRealm extends AuthorizingRealm {
 
-    @Resource
+    @Autowired
     private AdministratorService adminService;
 
-    @Resource
+    @Autowired
     private RoleService roleService;
+
+    public MyShiroRealm() {
+    }
 
     /**
      * 为当前登录成功的用户授予权限和分配角色
@@ -40,7 +44,7 @@ public class AdminRealm extends AuthorizingRealm {
 
         System.out.println("======授权认证=======");
         //获得用户手机
-        String phoneNum = (String) SecurityUtils.getSubject().getPrincipal();
+        String phoneNum = (String) principalCollection.getPrimaryPrincipal();
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         Administrator admin = adminService.searchAdministratorByPhoneNum(phoneNum);
         //获得该用户角色
@@ -49,7 +53,7 @@ public class AdminRealm extends AuthorizingRealm {
         Set<String> set = new HashSet<>();
         set.add(role.getRoleName());
         //设置该用户拥有的角色
-        info.setRoles(set);
+        info.addRoles(set);
         return info;
 
 

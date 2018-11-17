@@ -37,10 +37,21 @@ public interface ConstantUtils {
         public static final Integer PAGESNUM = 4;
     }
 
-    public static class Path{
+    class Path{
 
         //虚拟目录地址
         public static final String DIRPATH = "E:/Images";
 
     }
+
+    class Cookie{
+
+        //Cookie最长存活时间(单位：秒)
+        public static final int COOKIE_MAX_TIME = 3*24*3600;
+    }
+
+//    class Redis{
+//
+//        public static final long REDIS_MAX_TIME = 3*24*3600;
+//    }
 }
