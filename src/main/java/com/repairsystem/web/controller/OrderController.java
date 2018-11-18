@@ -6,12 +6,14 @@ import com.repairsystem.entity.Orders;
 import com.repairsystem.entity.vo.OrderVO;
 import com.repairsystem.service.ClassService;
 import com.repairsystem.service.CompleteOrderService;
+import com.repairsystem.service.EmailService;
 import com.repairsystem.service.OrdersService;
 import com.repairsystem.utils.*;
 import com.sun.xml.internal.bind.v2.TODO;
 import io.swagger.annotations.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -39,6 +41,10 @@ public class OrderController {
 
     @Autowired
     private CompleteOrderService completeOrderService;
+
+    @Autowired
+    private EmailService emailService;
+
 
     @ApiOperation(value = "获得所有维修工单信息")
     @ApiImplicitParam(name = "page", value = "当前页", required = true, dataType = "String", paramType = "query")
@@ -155,11 +161,16 @@ public class OrderController {
     })
     @GetMapping("/receiveOrder")
     public JsonResult receiveOrder(Integer orderId,Integer adminId){
+        Orders orderInfo = ordersService.searchOrderById(orderId);
         Orders order = new Orders();
         order.setOrderId(orderId);
         order.setAdminId(adminId);
         order.setStatus(1);
         ordersService.updateOrder(order);
+        String emailResult = emailService.acceptOrderMail(orderInfo.getUserName(),orderInfo.getUserEmail());
+        if(!"OK".equals(emailResult)){
+            JsonResult.errorMsg("邮件发送失败");
+        }
         return JsonResult.ok();
     }
 
@@ -185,6 +196,10 @@ public class OrderController {
 
         completeOrderService.saveCompleteOrder(completeOrder);
         ordersService.deleteOrder(orderId);
+        String emailResult = emailService.completeOrderMail(order.getUserName(),order.getUserEmail());
+        if(!"OK".equals(emailResult)){
+            JsonResult.errorMsg("邮件发送失败");
+        }
         return JsonResult.ok();
 
     }

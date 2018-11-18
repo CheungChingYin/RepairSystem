@@ -54,4 +54,8 @@ public interface ConstantUtils {
 //
 //        public static final long REDIS_MAX_TIME = 3*24*3600;
 //    }
+
+    class Mail{
+        public static final String FROM_MAIL="FSPT_RepairManagement@outlook.com";
+    }
 }
