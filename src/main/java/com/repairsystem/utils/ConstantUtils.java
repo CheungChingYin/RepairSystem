@@ -42,6 +42,8 @@ public interface ConstantUtils {
         //虚拟目录地址
         public static final String DIRPATH = "E:/Images";
 
+        public static final String QRCODEPATH = "/QRCODE";
+
     }
 
     class Cookie{
