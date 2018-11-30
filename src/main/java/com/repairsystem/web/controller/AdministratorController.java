@@ -10,6 +10,7 @@ import com.repairsystem.utils.*;
 import io.swagger.annotations.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,8 +50,16 @@ public class AdministratorController {
         //根据管理员手机号和密码创建token
         UsernamePasswordToken token = new UsernamePasswordToken(adminPhoneNum, adminPassword);
         Subject subject = SecurityUtils.getSubject();
-        subject.login(token);
-        return JsonResult.ok();
+        try {
+            subject.login(token);
+        }catch (AccountException e){
+            return JsonResult.errorException(e.getMessage());
+        }
+        Administrator admin = adminService.searchAdministratorByPhoneNum(adminPhoneNum);
+        AdministratorVO adminVO = Entity2VO.entity2VO(admin,AdministratorVO.class);
+        Map<String,Object> resultMap = new HashMap<String, Object>();
+        resultMap.put("adminInfo",adminVO);
+        return JsonResult.ok(resultMap);
     }
 
     @ApiOperation(value = "获得全部管理员资料")
