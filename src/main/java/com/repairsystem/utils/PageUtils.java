@@ -23,6 +23,7 @@ public class PageUtils {
         List<Integer> pageList = pageHandler(tempPage,tempCount);
         Integer pages = pagesCount(tempCount);
 
+        map.put("page",page);
         map.put("prePage",prePage);
         map.put("nextPage",nextPage);
         map.put("pages",pages);

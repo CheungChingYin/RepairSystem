@@ -11,6 +11,7 @@ import io.swagger.annotations.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AccountException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,8 @@ public class AdministratorController {
             subject.login(token);
         }catch (AccountException e){
             return JsonResult.errorException(e.getMessage());
+        }catch (IncorrectCredentialsException e1){
+            return JsonResult.errorException(e1.getMessage());
         }
         Administrator admin = adminService.searchAdministratorByPhoneNum(adminPhoneNum);
         AdministratorVO adminVO = Entity2VO.entity2VO(admin,AdministratorVO.class);
@@ -149,6 +152,10 @@ public class AdministratorController {
     public JsonResult updateAdministratorInfo(@RequestBody Administrator admin) {
         if (StringUtils.isBlank(admin.getAdminId().toString())) {
             return JsonResult.errorMsg("删除失败，传入的管理员ID不能为空");
+        }
+        if (StringUtils.isNotBlank(admin.getAdminPassword())){
+            String password = admin.getAdminPassword();
+            admin.setAdminPassword(PasswordEncryptionUtils.plainText2MD5Encrypt(password));
         }
         adminService.updateAdministrator(admin);
         return JsonResult.ok();
