@@ -61,6 +61,32 @@ public class CompleteOrder {
     private String remark;
 
     /**
+     * 所属教室ID
+     */
+    @Column(name = "class_id")
+    @ApiModelProperty(value = "实训室ID",name = "classId",example = "1",required = true)
+    private Integer classId;
+
+    /**
+     * 所属实训室名称
+     */
+    @ApiModelProperty(hidden = true)
+    private String className;
+
+    /**
+     * 所属实训楼ID
+     */
+    @Column(name = "building_id")
+    @ApiModelProperty(value = "所属实训楼ID",name = "buildingId",example = "1",required = true)
+    private Integer buildingId;
+
+    /**
+     * 所属实训楼名称
+     */
+    @ApiModelProperty(hidden = true)
+    private String buildingName;
+
+    /**
      * 获取完成工单ID
      *
      * @return order_id - 完成工单ID
@@ -184,6 +210,38 @@ public class CompleteOrder {
         this.remark = remark;
     }
 
+    public Integer getClassId() {
+        return classId;
+    }
+
+    public void setClassId(Integer classId) {
+        this.classId = classId;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public Integer getBuildingId() {
+        return buildingId;
+    }
+
+    public void setBuildingId(Integer buildingId) {
+        this.buildingId = buildingId;
+    }
+
+    public String getBuildingName() {
+        return buildingName;
+    }
+
+    public void setBuildingName(String buildingName) {
+        this.buildingName = buildingName;
+    }
+
     @Override
     public String toString() {
         return "CompleteOrder{" +
@@ -194,6 +252,10 @@ public class CompleteOrder {
                 ", imagePath='" + imagePath + '\'' +
                 ", problem='" + problem + '\'' +
                 ", remark='" + remark + '\'' +
+                ", classId=" + classId +
+                ", className='" + className + '\'' +
+                ", buildingId=" + buildingId +
+                ", buildingName='" + buildingName + '\'' +
                 '}';
     }
 }

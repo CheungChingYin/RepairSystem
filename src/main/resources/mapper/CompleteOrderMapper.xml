@@ -12,30 +12,36 @@
         <result column="image_path" property="imagePath" jdbcType="VARCHAR"/>
         <result column="problem" property="problem" jdbcType="LONGVARCHAR"/>
         <result column="remark" property="remark" jdbcType="LONGVARCHAR"/>
+        <result column="class_id" property="classId" jdbcType="INTEGER"/>
+        <result column="className" property="className" jdbcType="INTEGER"/>
+        <result column="buildingName" property="buildingName" jdbcType="INTEGER"/>
     </resultMap>
 
     <select id="getAllCompleteOrder" resultMap="BaseResultMap">
-      SELECT
-        co.*, a.admin_name AS adminName
-      FROM
-        complete_order co,
-        administrator a
-      WHERE
-        co.admin_id = a.admin_id
-      ORDER BY
-        co.complete_time DESC
+     SELECT
+        co.*, a.admin_name AS adminName,
+        c.class_name AS className,
+        b.building_name AS buildingName
+    FROM
+        complete_order AS co
+    LEFT JOIN class AS c ON c.class_id = co.class_id
+    LEFT JOIN building AS b ON b.building_id = co.building_id
+    LEFT JOIN administrator AS a ON a.admin_id = co.admin_id
+    ORDER BY
+	  co.complete_time DESC
   </select>
     <select id="getCompleteOrderById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         SELECT
-            co.*, a.admin_name AS adminName
+            co.*,a.admin_name AS adminName,
+            c.class_name AS className,
+            b.building_name AS buildingName
         FROM
-            complete_order co,
-            administrator a
+          complete_order AS co
+        LEFT JOIN class AS c ON c.class_id = co.class_id
+        LEFT JOIN building AS b ON b.building_id = co.building_id
+        LEFT JOIN administrator AS a ON a.admin_id = co.admin_id
         WHERE
-            co.admin_id = a.admin_id
-        AND co.order_id = #{id}
-        ORDER BY
-            co.complete_time DESC
+            co.order_id = #{id}
     </select>
 
     <select id="getCompleteOrderCount" resultType="java.lang.Integer">
@@ -44,10 +50,14 @@
 
     <select id="getCompleteOrderByKeyWord" resultMap="BaseResultMap" parameterType="java.lang.String">
         SELECT
-            co.*, a.admin_name AS adminName
+            co.*,a.admin_name AS adminName,
+            c.class_name AS className,
+            b.building_name AS buildingName
         FROM
             complete_order AS co
-        LEFT JOIN administrator AS a ON co.admin_id = a.admin_id
+        LEFT JOIN class AS c ON c.class_id = co.class_id
+        LEFT JOIN building AS b ON b.building_id = co.building_id
+        LEFT JOIN administrator AS a ON a.admin_id = co.admin_id
         WHERE
             co.problem LIKE "%"#{keyWord}"%"
         ORDER BY

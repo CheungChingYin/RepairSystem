@@ -193,6 +193,8 @@ public class OrderController {
         completeOrder.setImagePath(order.getImagesPath());
         completeOrder.setCompleteTime(new Date());
         completeOrder.setAdminName(null);
+        completeOrder.setClassName(null);
+        completeOrder.setBuildingName(null);
 
         try {
             completeOrderService.saveCompleteOrder(completeOrder);

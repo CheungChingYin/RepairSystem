@@ -18,6 +18,8 @@ public class CompleteOrderVO {
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date completeTime;
     private String imagePath;
+    private String className;
+    private String buildingName;
 
     public Integer getOrderId() {
         return orderId;
@@ -67,6 +69,22 @@ public class CompleteOrderVO {
         this.imagePath = imagePath;
     }
 
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public String getBuildingName() {
+        return buildingName;
+    }
+
+    public void setBuildingName(String buildingName) {
+        this.buildingName = buildingName;
+    }
+
     @Override
     public String toString() {
         return "CompleteOrderVO{" +
@@ -76,6 +94,8 @@ public class CompleteOrderVO {
                 ", adminName='" + adminName + '\'' +
                 ", completeTime=" + completeTime +
                 ", imagePath='" + imagePath + '\'' +
+                ", className='" + className + '\'' +
+                ", buildingName='" + buildingName + '\'' +
                 '}';
     }
 }
