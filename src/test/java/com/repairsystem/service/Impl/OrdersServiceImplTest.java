@@ -58,7 +58,6 @@ public class OrdersServiceImplTest {
     public void updateOrder() {
         Orders orders = new Orders();
         orders.setOrderId(1);
-        orders.setCompleteTime(new Date());
         orders.setAdminId(2);
         ordersService.updateOrder(orders);
     }

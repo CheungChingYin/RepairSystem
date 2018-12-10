@@ -13,7 +13,6 @@
         <result column="buildingName" property="buildingName" jdbcType="VARCHAR"/>
         <result column="status" property="status" jdbcType="INTEGER"/>
         <result column="submit_time" property="submitTime" jdbcType="TIMESTAMP"/>
-        <result column="complete_time" property="completeTime" jdbcType="TIMESTAMP"/>
         <result column="images_path" property="imagesPath" jdbcType="VARCHAR"/>
         <result column="admin_id" property="adminId" jdbcType="INTEGER"/>
         <result column="adminName" property="adminName" jdbcType="VARCHAR"/>

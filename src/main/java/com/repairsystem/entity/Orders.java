@@ -63,13 +63,6 @@ public class Orders {
     @ApiModelProperty(hidden = true)
     private Date submitTime;
 
-    /**
-     * 完成时间
-     */
-    @Column(name = "complete_time")
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(hidden = true)
-    private Date completeTime;
 
     /**
      * 故障图片上传
@@ -263,24 +256,6 @@ public class Orders {
     }
 
     /**
-     * 获取完成时间
-     *
-     * @return complete_time - 完成时间
-     */
-    public Date getCompleteTime() {
-        return completeTime;
-    }
-
-    /**
-     * 设置完成时间
-     *
-     * @param completeTime 完成时间
-     */
-    public void setCompleteTime(Date completeTime) {
-        this.completeTime = completeTime;
-    }
-
-    /**
      * 获取故障图片上传
      *
      * @return images_path - 故障图片上传
@@ -417,7 +392,6 @@ public class Orders {
                 ", buildingName='" + buildingName + '\'' +
                 ", status=" + status +
                 ", submitTime=" + submitTime +
-                ", completeTime=" + completeTime +
                 ", imagesPath='" + imagesPath + '\'' +
                 ", adminId=" + adminId +
                 ", adminName='" + adminName + '\'' +

@@ -52,7 +52,6 @@ public class CompleteOrderServiceImplTest {
         CompleteOrder completeOrder = new CompleteOrder();
         completeOrder.setProblem(orders.getProblem());
         completeOrder.setRemark("已修复");
-        completeOrder.setCompleteTime(orders.getCompleteTime());
         completeOrder.setAdminId(orders.getAdminId());
         completeOrder.setImagePath("/test/test01.jpg");
         completeOrderService.saveCompleteOrder(completeOrder);

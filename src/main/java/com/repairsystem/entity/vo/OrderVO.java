@@ -19,8 +19,6 @@ public class OrderVO {
     private Integer status;
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date submitTime;
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date completeTime;
     private String imagesPath;
     private Integer adminId;
     private String adminName;
@@ -84,14 +82,6 @@ public class OrderVO {
         this.submitTime = submitTime;
     }
 
-    public Date getCompleteTime() {
-        return completeTime;
-    }
-
-    public void setCompleteTime(Date completeTime) {
-        this.completeTime = completeTime;
-    }
-
     public String getImagesPath() {
         return imagesPath;
     }
@@ -150,7 +140,6 @@ public class OrderVO {
                 ", buildingName='" + buildingName + '\'' +
                 ", status=" + status +
                 ", submitTime=" + submitTime +
-                ", completeTime=" + completeTime +
                 ", imagesPath='" + imagesPath + '\'' +
                 ", adminId=" + adminId +
                 ", adminName='" + adminName + '\'' +
