@@ -194,7 +194,11 @@ public class OrderController {
         completeOrder.setCompleteTime(new Date());
         completeOrder.setAdminName(null);
 
-        completeOrderService.saveCompleteOrder(completeOrder);
+        try {
+            completeOrderService.saveCompleteOrder(completeOrder);
+        } catch (Exception e) {
+            return JsonResult.errorException(e.getMessage());
+        }
         ordersService.deleteOrder(orderId);
         String emailResult = emailService.completeOrderMail(order.getUserName(),order.getUserEmail());
         if(!"OK".equals(emailResult)){

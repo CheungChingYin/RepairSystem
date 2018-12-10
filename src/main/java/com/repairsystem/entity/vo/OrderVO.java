@@ -22,6 +22,7 @@ public class OrderVO {
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date completeTime;
     private String imagesPath;
+    private Integer adminId;
     private String adminName;
     private String userName;
     private String userPhone;
@@ -131,6 +132,14 @@ public class OrderVO {
         this.userEmail = userEmail;
     }
 
+    public Integer getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(Integer adminId) {
+        this.adminId = adminId;
+    }
+
     @Override
     public String toString() {
         return "OrderVO{" +
@@ -143,6 +152,7 @@ public class OrderVO {
                 ", submitTime=" + submitTime +
                 ", completeTime=" + completeTime +
                 ", imagesPath='" + imagesPath + '\'' +
+                ", adminId=" + adminId +
                 ", adminName='" + adminName + '\'' +
                 ", userName='" + userName + '\'' +
                 ", userPhone='" + userPhone + '\'' +
