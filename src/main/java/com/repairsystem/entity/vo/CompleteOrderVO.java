@@ -20,6 +20,7 @@ public class CompleteOrderVO {
     private String imagePath;
     private String className;
     private String buildingName;
+    private Integer computerNumber;
 
     public Integer getOrderId() {
         return orderId;
@@ -85,6 +86,14 @@ public class CompleteOrderVO {
         this.buildingName = buildingName;
     }
 
+    public Integer getComputerNumber() {
+        return computerNumber;
+    }
+
+    public void setComputerNumber(Integer computerNumber) {
+        this.computerNumber = computerNumber;
+    }
+
     @Override
     public String toString() {
         return "CompleteOrderVO{" +
@@ -96,6 +105,7 @@ public class CompleteOrderVO {
                 ", imagePath='" + imagePath + '\'' +
                 ", className='" + className + '\'' +
                 ", buildingName='" + buildingName + '\'' +
+                ", computerNumber=" + computerNumber +
                 '}';
     }
 }

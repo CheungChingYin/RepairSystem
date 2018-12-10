@@ -15,6 +15,7 @@
         <result column="class_id" property="classId" jdbcType="INTEGER"/>
         <result column="className" property="className" jdbcType="INTEGER"/>
         <result column="buildingName" property="buildingName" jdbcType="INTEGER"/>
+        <result column="computer_number" property="computerNumber" jdbcType="INTEGER"/>
     </resultMap>
 
     <select id="getAllCompleteOrder" resultMap="BaseResultMap">

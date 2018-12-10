@@ -86,6 +86,10 @@ public class CompleteOrder {
     @ApiModelProperty(hidden = true)
     private String buildingName;
 
+    @Column(name = "computer_number")
+    @ApiModelProperty(value = "出现问题的电脑编号", name = "computerNumber", example = "1", required = true)
+    private Integer computerNumber;
+
     /**
      * 获取完成工单ID
      *
@@ -242,6 +246,24 @@ public class CompleteOrder {
         this.buildingName = buildingName;
     }
 
+    /**
+     * 获取电脑序号
+     *
+     * @return computer_number - 电脑序号
+     */
+    public Integer getComputerNumber() {
+        return computerNumber;
+    }
+
+    /**
+     * 设置电脑序号
+     *
+     * @param computerNumber 电脑序号
+     */
+    public void setComputerNumber(Integer computerNumber) {
+        this.computerNumber = computerNumber;
+    }
+
     @Override
     public String toString() {
         return "CompleteOrder{" +
@@ -256,6 +278,7 @@ public class CompleteOrder {
                 ", className='" + className + '\'' +
                 ", buildingId=" + buildingId +
                 ", buildingName='" + buildingName + '\'' +
+                ", computerNumber=" + computerNumber +
                 '}';
     }
 }
