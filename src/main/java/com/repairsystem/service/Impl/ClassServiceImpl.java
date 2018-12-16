@@ -1,5 +1,6 @@
 package com.repairsystem.service.Impl;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import com.repairsystem.dao.ClassMapper;
 import com.repairsystem.entity.Class;
 import com.repairsystem.entity.vo.ClassVO;
@@ -76,7 +77,7 @@ public class ClassServiceImpl implements ClassService {
 
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
-    public void deleteClass(Integer id) {
+    public void deleteClass(Integer id) throws MySQLIntegrityConstraintViolationException {
         if (StringUtils.isBlank(id.toString())) {
             throw new ClassIdIsNullException("传入的实训室ID为空");
         }

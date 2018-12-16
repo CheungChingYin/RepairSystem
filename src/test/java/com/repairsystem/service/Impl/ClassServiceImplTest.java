@@ -1,5 +1,6 @@
 package com.repairsystem.service.Impl;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import com.repairsystem.RepairsystemApplication;
 import com.repairsystem.dao.ClassMapper;
 import com.repairsystem.entity.Class;
@@ -73,7 +74,11 @@ public class ClassServiceImplTest {
 
     @Test
     public void deleteClass() {
-        classService.deleteClass(6);
+        try {
+            classService.deleteClass(6);
+        } catch (MySQLIntegrityConstraintViolationException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test

@@ -9,6 +9,7 @@ public class ClassVO {
 
     private Integer classId;
     private String className;
+    private Integer buildingId;
     private String buildingName;
     private Integer computerTotal;
     private Integer computerEnable;
@@ -28,6 +29,14 @@ public class ClassVO {
 
     public void setClassName(String className) {
         this.className = className;
+    }
+
+    public Integer getBuildingId() {
+        return buildingId;
+    }
+
+    public void setBuildingId(Integer buildingId) {
+        this.buildingId = buildingId;
     }
 
     public String getBuildingName() {
@@ -67,6 +76,7 @@ public class ClassVO {
         return "ClassVO{" +
                 "classId=" + classId +
                 ", className='" + className + '\'' +
+                ", buildingId=" + buildingId +
                 ", buildingName='" + buildingName + '\'' +
                 ", computerTotal=" + computerTotal +
                 ", computerEnable=" + computerEnable +

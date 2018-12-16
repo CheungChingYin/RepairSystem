@@ -1,5 +1,6 @@
 package com.repairsystem.service;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import com.repairsystem.entity.Class;
 import com.repairsystem.entity.vo.ClassVO;
 
@@ -50,7 +51,7 @@ public interface ClassService {
      * 删除机房信息
      * @param id
      */
-    void deleteClass(Integer id);
+    void deleteClass(Integer id) throws MySQLIntegrityConstraintViolationException;
 
     /**
      * 增加实训室可用电脑

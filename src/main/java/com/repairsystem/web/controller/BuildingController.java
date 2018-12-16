@@ -31,7 +31,16 @@ public class BuildingController {
     @Autowired
     private BuildingService buildingService;
 
-    @ApiOperation(value = "获得所有实训楼信息")
+    @ApiOperation(value = "获得全部实训楼信息")
+    @GetMapping("/getBuildingInfo")
+    public JsonResult getBuildingInfo(){
+        List<Building> list = buildingService.searchAllBuilding();
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        resultMap.put("Info", list);
+        return JsonResult.ok(resultMap);
+    }
+
+    @ApiOperation(value = "获得十条实训楼信息")
     @ApiImplicitParam(name = "page", value = "当前页", required = true, dataType = "String", paramType = "query")
     @GetMapping("/getAllBuildingInfo")
     public JsonResult getAllBuildingInfo(String page) {

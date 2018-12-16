@@ -1,6 +1,7 @@
 package com.repairsystem.web.controller;
 
 import com.github.pagehelper.PageHelper;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import com.repairsystem.entity.Class;
 import com.repairsystem.entity.vo.ClassVO;
 import com.repairsystem.service.ClassService;
@@ -134,7 +135,11 @@ public class ClassController {
         if (StringUtils.isBlank(classId.toString())) {
             return JsonResult.errorMsg("传入的班级ID(classId)不能为空");
         }
-        classService.deleteClass(classId);
+        try {
+            classService.deleteClass(classId);
+        }catch (MySQLIntegrityConstraintViolationException e){
+            return JsonResult.errorException("由于班级信息和工单绑定,请删除和当前班级相关工单后再进行删除");
+        }
         return JsonResult.ok();
     }
 }
