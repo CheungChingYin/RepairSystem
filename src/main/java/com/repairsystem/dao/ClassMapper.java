@@ -14,5 +14,7 @@ public interface ClassMapper extends MyMapper<Class> {
 
     List<Class> getClassByName(String name);
 
+    List<Class> getClassByBuildingId(String buildingId);
+
     Integer getClassCount();
 }

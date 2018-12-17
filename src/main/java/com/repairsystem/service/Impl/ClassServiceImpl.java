@@ -4,6 +4,7 @@ import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExceptio
 import com.repairsystem.dao.ClassMapper;
 import com.repairsystem.entity.Class;
 import com.repairsystem.entity.vo.ClassVO;
+import com.repairsystem.exception.BuildingIdIsNullException;
 import com.repairsystem.exception.ClassIdIsNullException;
 import com.repairsystem.exception.ClassNameIsNullException;
 import com.repairsystem.service.ClassService;
@@ -51,6 +52,15 @@ public class ClassServiceImpl implements ClassService {
         }
 
         return classMapper.getClassByName(name);
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public List<Class> searchClassByBuildingId(String buildingId) {
+        if(StringUtils.isBlank(buildingId)){
+            throw new BuildingIdIsNullException("传入的实训楼ID不能为空");
+        }
+        return classMapper.getClassByBuildingId(buildingId);
     }
 
     @Transactional(propagation = Propagation.SUPPORTS)

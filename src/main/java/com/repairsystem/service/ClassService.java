@@ -33,6 +33,13 @@ public interface ClassService {
      */
     List<Class> searchClassByName(String name);
 
+    /**
+     * 通过实训楼ID称获取机房信息
+     * @param buildingId
+     * @return
+     */
+    List<Class> searchClassByBuildingId(String buildingId);
+
     Integer getClassCount();
 
     /**

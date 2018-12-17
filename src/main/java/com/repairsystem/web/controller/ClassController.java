@@ -111,6 +111,21 @@ public class ClassController {
         return JsonResult.ok(resultMap);
     }
 
+    @ApiOperation(value = "通过实训楼ID获得实训室信息")
+    @ApiImplicitParam(name = "buildingId", value = "实训室ID", required = true, dataType = "String", paramType = "query")
+    @GetMapping("/getClassInfoByBuildingId")
+    public JsonResult getClassInfoByBuildingId(String buildingId){
+        if (StringUtils.isBlank(buildingId)){
+            return JsonResult.errorMsg("传入的实训楼Id不能为空!");
+        }
+        List<Class> listClass = classService.searchClassByBuildingId(buildingId);
+        List<ClassVO> listVO = Entity2VO.entityList2VOList(listClass,ClassVO.class);
+
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        resultMap.put("Info", listVO);
+        return JsonResult.ok(resultMap);
+    }
+
     @ApiOperation("保存班级信息")
     @PostMapping("/saveClassInfo")
     public JsonResult saveClassInfo(@RequestBody Class clazz) {
