@@ -73,6 +73,7 @@ public class ShiroConfig {
         filterChainMap.put("/admin/login", "anon");
         filterChainMap.put("/login","anon");
         filterChainMap.put("/orders/saveOrders","anon");
+        filterChainMap.put("/orders/uploadImage","anon");
 
         //需要认证的接口
         filterChainMap.put("/building/**","authc");

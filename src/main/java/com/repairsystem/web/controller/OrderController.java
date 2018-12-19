@@ -91,6 +91,23 @@ public class OrderController {
         return JsonResult.ok(resultMap);
     }
 
+    @ApiOperation(value = "上传工单图片")
+    @PostMapping(value = "/uploadImage")
+    public JsonResult uploadImage(@ApiParam(value = "图片上传") MultipartFile file){
+        if (!file.isEmpty()) {
+            String dbPath = null;
+            Map<String,String> map = OrderUploadUtils.upLoadOrderImage(file);
+            if (map.get("success") != null){
+                dbPath = map.get("success");
+                return JsonResult.ok(dbPath);
+            }else{
+                return JsonResult.errorMsg(map.get("failure"));
+            }
+        } else {
+            return null;
+        }
+    }
+
     @ApiOperation(value = "保存维修工单")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "problem", value = "维修工单问题", required = true, dataType = "String", paramType = "form"),
@@ -100,24 +117,16 @@ public class OrderController {
             @ApiImplicitParam(name = "userName", value = "报修人名称", required = true, dataType = "String", paramType = "form"),
             @ApiImplicitParam(name = "userPhone", value = "报修人电话", required = true, dataType = "String", paramType = "form"),
             @ApiImplicitParam(name = "userEmail", value = "报修人邮箱", required = true, dataType = "String", paramType = "form"),
+            @ApiImplicitParam(name = "imagePath", value = "图片地址", required = true, dataType = "String", paramType = "form"),
     })
     @PostMapping(value = "/saveOrders")
-    public JsonResult saveOrders(String problem, Integer computerNumber, Integer classId, Integer buildingId, String userName, String userPhone, String userEmail, @ApiParam(value = "图片上传") MultipartFile file) {
+    public JsonResult saveOrders(String problem, Integer computerNumber, Integer classId, Integer buildingId, String userName, String userPhone, String userEmail, String imagePath) {
         if (StringUtils.isBlank(classId.toString())) {
             JsonResult.errorMsg("传入的实训室ID(classId)不能为空");
         }
         Orders orders = new Orders();
-        if (!file.isEmpty()) {
-            String dbPath = null;
-            Map<String,String> map = OrderUploadUtils.upLoadOrderImage(file,userName);
-            if (map.get("success") != null){
-                dbPath = map.get("success");
-            }else{
-                return JsonResult.errorMsg(map.get("failure"));
-            }
-            orders.setImagesPath(dbPath);
-        }
 
+        orders.setImagesPath(imagePath);
         orders.setProblem(problem);
         orders.setComputerNumber(computerNumber);
         orders.setClassId(classId);

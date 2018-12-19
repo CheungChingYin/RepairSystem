@@ -26,7 +26,7 @@ public class OrderUploadUtils {
 
     private static String dir = ConstantUtils.Path.DIRPATH;
 
-    public static Map<String, String> upLoadOrderImage(MultipartFile file, String userName) {
+    public static Map<String, String> upLoadOrderImage(MultipartFile file) {
         Map<String, String> resultMap = new HashMap<String, String>();
         if (file.isEmpty()) {
             resultMap.put("failure", "传入的文件为空");
@@ -52,7 +52,7 @@ public class OrderUploadUtils {
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd&HH-mm-ss");
         String currentTime = simpleDateFormat.format(new Date());
-        fileName = currentTime + userName + UUID.randomUUID() + ".jpg";
+        fileName = currentTime + UUID.randomUUID() + ".jpg";
         InputStream inputStream = null;
         FileOutputStream fileOutputStream = null;
         try {
