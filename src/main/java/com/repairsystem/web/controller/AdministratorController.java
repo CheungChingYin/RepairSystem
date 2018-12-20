@@ -65,6 +65,12 @@ public class AdministratorController {
         return JsonResult.ok(resultMap);
     }
 
+    @ApiOperation(value = "管理员登出")
+    @PostMapping("/logout")
+    public JsonResult logout(){
+        return JsonResult.ok();
+    }
+
     @ApiOperation(value = "获得全部管理员资料")
     @ApiImplicitParam(name = "page", value = "当前页", required = true, dataType = "String", paramType = "query")
     @GetMapping("/getAllAdminInfo")

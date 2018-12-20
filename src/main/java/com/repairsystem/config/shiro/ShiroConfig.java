@@ -58,6 +58,7 @@ public class ShiroConfig {
 
         Map<String, Filter> filters = new LinkedHashMap<String, Filter>();
         filters.put("logout", new MySignOutFilter(redisTemplate));
+        shiroFilterFactoryBean.setFilters(filters);
 
         // LinkedHashMap 是有序的，进行顺序拦截器配置
         Map<String,String> filterChainMap = new LinkedHashMap<String, String>();
@@ -80,12 +81,12 @@ public class ShiroConfig {
         filterChainMap.put("/class/**","authc");
         filterChainMap.put("/completeOrders/**","authc");
         filterChainMap.put("/orders/**","authc");
+        filterChainMap.put("/QRCode/**","authc");
+        // 配置 logout 过滤器
+        filterChainMap.put("/admin/logout", "logout");
         //管理员接口只有超级管理员才能使用
         filterChainMap.put("/admin/**","authc,roles[超级管理员]");
 
-
-        // 配置 logout 过滤器
-        filterChainMap.put("/logout", "logout");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainMap);
 
         LOGGER.info("====shiroFilterFactoryBean注册完成====");

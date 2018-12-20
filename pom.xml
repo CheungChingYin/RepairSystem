@@ -6,7 +6,7 @@
     <groupId>com.repairsystem</groupId>
     <artifactId>repairsystem</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <name>repairsystem</name>
     <description>基于SpringBoot的机房报修系统，实现前后端分离。</description>
