@@ -1,5 +1,6 @@
 package com.repairsystem.config;
 
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -8,6 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @date 2018/11/27
  * @time 21:39
  */
+@Configuration
 public class CorsConfig implements WebMvcConfigurer {
 
     @Override
@@ -15,7 +17,8 @@ public class CorsConfig implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowedOrigins("*")
                 .allowCredentials(true)
-                .allowedMethods("GET", "POST", "DELETE", "PUT","PATCH")
+                .allowedMethods("*").
+                allowedHeaders("*")
                 .maxAge(3600);
     }
 }
