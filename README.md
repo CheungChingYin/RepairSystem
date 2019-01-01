@@ -96,8 +96,10 @@ MySQL文件位于项目根目录的MySQL文件夹中（建议数据库名为mach
 打开RepairsystemApplication,右键Run即可
 [![F5ucFA.md.png](https://s2.ax1x.com/2019/01/01/F5ucFA.md.png)](https://imgchr.com/i/F5ucFA)
 
+
 看见下图即为成功启动项目
 [![F5ugJI.md.png](https://s2.ax1x.com/2019/01/01/F5ugJI.md.png)](https://imgchr.com/i/F5ugJI)
+
 
 访问`http://localhost:8081/swagger-ui.html`能够访问成功即部署成功
 [![F5uWSP.md.png](https://s2.ax1x.com/2019/01/01/F5uWSP.md.png)](https://imgchr.com/i/F5uWSP)
