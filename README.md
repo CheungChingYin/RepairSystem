@@ -110,3 +110,105 @@ MySQL文件位于项目根目录的MySQL文件夹中（建议数据库名为mach
 ### （二）解压文件，打开IDEA，选择`Import Project`,选中之前解压的文件夹
 [![F5KBpq.png](https://s2.ax1x.com/2019/01/01/F5KBpq.png)](https://imgchr.com/i/F5KBpq)
 ### （三）根据上面基于Git/SVN Colne的方式的（三）~（七）步骤执行即可
+# 五 项目结构
+```
+com
+    └─repairsystem
+        │  RepairsystemApplication.java
+        │  ServletInitializer.java
+        │
+        ├─config
+        │  │  CorsConfig.java
+        │  │  DruidConfig.java
+        │  │  JacksonConfig.java
+        │  │  SchedulerTask.java
+        │  │  Swagger2Config.java
+        │  │
+        │  └─shiro
+        │          MyRedisSessionDao.java
+        │          MySessionIdGenerator.java
+        │          MyShiroRealm.java
+        │          MySignOutFilter.java
+        │          ShiroConfig.java
+        │          ShiroRedisCache.java
+        │          ShiroRedisCacheManager.java
+        │
+        ├─dao
+        │      AdministratorMapper.java
+        │      BuildingMapper.java
+        │      ClassMapper.java
+        │      CompleteOrderMapper.java
+        │      OrdersMapper.java
+        │      RoleMapper.java
+        │
+        ├─entity
+        │  │  Administrator.java
+        │  │  Building.java
+        │  │  Class.java
+        │  │  CompleteOrder.java
+        │  │  Orders.java
+        │  │  Role.java
+        │  │
+        │  └─vo
+        │          AdministratorVO.java
+        │          ClassVO.java
+        │          CompleteOrderVO.java
+        │          OrderVO.java
+        │
+        ├─exception
+        │  │  AdministratorIdIsNullException.java
+        │  │  AdministratorNameIsNullException.java
+        │  │  AdministratorPasswordIsNullException.java
+        │  │  AdministratorPhoneIsNullException.java
+        │  │  BuildingIdIsNullException.java
+        │  │  BuildingNameIdIsNullException.java
+        │  │  ClassIdIsNullException.java
+        │  │  ClassNameIsNullException.java
+        │  │  CompleteOrderIdIsNullException.java
+        │  │  OrderIdIsNullException.java
+        │  │  PageIsNullException.java
+        │  │
+        │  └─handler
+        │          GlobalExceptionHandler.java
+        │
+        ├─service
+        │  │  AdministratorService.java
+        │  │  BuildingService.java
+        │  │  ClassService.java
+        │  │  CompleteOrderService.java
+        │  │  EmailService.java
+        │  │  OrdersService.java
+        │  │  RoleService.java
+        │  │
+        │  └─Impl
+        │          AdministratorServiceImpl.java
+        │          BuildingServiceImpl.java
+        │          ClassServiceImpl.java
+        │          CompleteOrderServiceImpl.java
+        │          EmailServiceImpl.java
+        │          OrdersServiceImpl.java
+        │          RoleServiceImpl.java
+        │
+        ├─utils
+        │      ConstantUtils.java
+        │      Entity2VO.java
+        │      JsonResult.java
+        │      MyMapper.java
+        │      OrderUploadUtils.java
+        │      PageUtils.java
+        │      PasswordEncryptionUtils.java
+        │      QRCodeUtils.java
+        │      SerializeUtil.java
+        │      ZipUtils.java
+        │
+        └─web
+            ├─controller
+            │      AdministratorController.java
+            │      BuildingController.java
+            │      ClassController.java
+            │      CompleteOrderController.java
+            │      OrderController.java
+            │      QRCodeController.java
+            │
+            └─ui
+```
