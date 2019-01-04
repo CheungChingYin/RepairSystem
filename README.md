@@ -20,6 +20,8 @@
 [【机房报修管理系统】1.简介篇 机房报修管理系统简介](https://blog.csdn.net/qq_33596978/article/details/85330814)
 
 [【机房报修管理系统】后端篇（一） 设计数据表](https://blog.csdn.net/qq_33596978/article/details/85634383)
+
+[机房报修管理系统】后端篇（二） SpringBoot项目搭建](https://blog.csdn.net/qq_33596978/article/details/85687727)
 # 二、涉及到的技术
 ## 1.后端
 ### （1）框架
