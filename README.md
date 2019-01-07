@@ -26,6 +26,8 @@
 [【机房报修管理系统】后端篇（三） 配置阿里巴巴Druid数据源](https://blog.csdn.net/qq_33596978/article/details/85775208)
 
 [【机房报修管理系统】后端篇（四） 配置Mybitis、通用Mapper及Pagehelper](https://blog.csdn.net/qq_33596978/article/details/85847850)
+
+[【机房报修管理系统】后端篇（五） 使用MybatisGenerator生成实体层和DAO层](https://blog.csdn.net/qq_33596978/article/details/85924971)
 # 二、涉及到的技术
 ## 1.后端
 ### （1）框架
