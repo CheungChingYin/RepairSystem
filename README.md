@@ -30,6 +30,8 @@
 [【机房报修管理系统】后端篇（五） 使用MybatisGenerator生成实体层和DAO层](https://blog.csdn.net/qq_33596978/article/details/85924971)
 
 [【机房报修管理系统】后端篇（六） 配置Cros解决跨域问题](https://blog.csdn.net/qq_33596978/article/details/85994125)
+
+[【机房报修管理系统】后端篇（七） 配置自定义JSON类及解决JSON的值空时不出现Null](https://blog.csdn.net/qq_33596978/article/details/86071271)
 # 二、涉及到的技术
 ## 1.后端
 ### （1）框架
