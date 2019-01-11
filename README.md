@@ -34,6 +34,8 @@
 [【机房报修管理系统】后端篇（七） 配置自定义JSON类及解决JSON的值空时不出现Null](https://blog.csdn.net/qq_33596978/article/details/86071271)
 
 [【机房报修管理系统】后端篇（八） 配置接口管理利器——Swagger2](https://blog.csdn.net/qq_33596978/article/details/86153304)
+
+[【机房报修管理系统】后端篇（九） 在SpringBoot配置非关系型数据库Redis](https://blog.csdn.net/qq_33596978/article/details/86229582)
 # 二、涉及到的技术
 ## 1.后端
 ### （1）框架
