@@ -211,6 +211,7 @@ public class OrderController {
             return JsonResult.errorException(e.getMessage());
         }
         ordersService.deleteOrder(orderId);
+        classService.increaseComputerEnable(order.getClassId());
         String emailResult = emailService.completeOrderMail(order.getUserName(),order.getUserEmail());
         if(!"OK".equals(emailResult)){
             JsonResult.errorMsg("邮件发送失败");
