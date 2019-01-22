@@ -43,13 +43,15 @@
 
 [【机房报修管理系统】后端篇（十二） Service层开发——工单管理服务](https://blog.csdn.net/qq_33596978/article/details/86491704)
 
-[【机房报修管理系统】 后端篇（十三） Service层开发——历史工单管理服务](https://blog.csdn.net/qq_33596978/article/details/86508279)
+[【机房报修管理系统】后端篇（十三） Service层开发——历史工单管理服务](https://blog.csdn.net/qq_33596978/article/details/86508279)
 
-[【机房报修管理系统】 后端篇（十四） Service层开发——实训室管理服务](https://blog.csdn.net/qq_33596978/article/details/86523707)
+[【机房报修管理系统】后端篇（十四） Service层开发——实训室管理服务](https://blog.csdn.net/qq_33596978/article/details/86523707)
 
 [【机房报修管理系统】后端篇（十五） Service层开发——实训楼管理服务](https://blog.csdn.net/qq_33596978/article/details/86552072)
 
 [【机房报修管理系统】后端篇（十六） Service层开发——邮件服务](https://blog.csdn.net/qq_33596978/article/details/86576329)
+
+[【机房报修管理系统】后端篇（十七） Service层开发——角色权限服务](https://blog.csdn.net/qq_33596978/article/details/86594543)
 # 二、涉及到的技术
 ## 1.后端
 ### （1）框架
