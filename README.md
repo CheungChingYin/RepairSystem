@@ -52,6 +52,8 @@
 [【机房报修管理系统】后端篇（十六） Service层开发——邮件服务](https://blog.csdn.net/qq_33596978/article/details/86576329)
 
 [【机房报修管理系统】后端篇（十七） Service层开发——角色权限服务](https://blog.csdn.net/qq_33596978/article/details/86594543)
+
+[【机房报修管理系统】后端篇（十八） Controller层开发——相关介绍Q&A](https://blog.csdn.net/qq_33596978/article/details/86610480)
 # 二、涉及到的技术
 ## 1.后端
 ### （1）框架
