@@ -53,21 +53,21 @@ public class AdministratorController {
         Subject subject = SecurityUtils.getSubject();
         try {
             subject.login(token);
-        }catch (AccountException e){
+        } catch (AccountException e) {
             return JsonResult.errorException(e.getMessage());
-        }catch (IncorrectCredentialsException e1){
+        } catch (IncorrectCredentialsException e1) {
             return JsonResult.errorException(e1.getMessage());
         }
         Administrator admin = adminService.searchAdministratorByPhoneNum(adminPhoneNum);
-        AdministratorVO adminVO = Entity2VO.entity2VO(admin,AdministratorVO.class);
-        Map<String,Object> resultMap = new HashMap<String, Object>();
-        resultMap.put("adminInfo",adminVO);
+        AdministratorVO adminVO = Entity2VO.entity2VO(admin, AdministratorVO.class);
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        resultMap.put("adminInfo", adminVO);
         return JsonResult.ok(resultMap);
     }
 
     @ApiOperation(value = "管理员登出")
     @PostMapping("/logout")
-    public JsonResult logout(){
+    public JsonResult logout() {
         return JsonResult.ok();
     }
 
@@ -149,6 +149,9 @@ public class AdministratorController {
     @PostMapping("/saveAdministratorInfo")
     public JsonResult saveAdministratorInfo(@RequestBody Administrator admin) {
 
+        if (StringUtils.isBlank(admin.getAdminId().toString())) {
+            return JsonResult.errorMsg("管理员ID不能为空");
+        }
         adminService.saveAdministrator(admin);
         return JsonResult.ok();
     }
@@ -157,9 +160,9 @@ public class AdministratorController {
     @PostMapping("updateAdministratorInfo")
     public JsonResult updateAdministratorInfo(@RequestBody Administrator admin) {
         if (StringUtils.isBlank(admin.getAdminId().toString())) {
-            return JsonResult.errorMsg("删除失败，传入的管理员ID不能为空");
+            return JsonResult.errorMsg("更新失败，传入的管理员ID不能为空");
         }
-        if (StringUtils.isNotBlank(admin.getAdminPassword())){
+        if (StringUtils.isNotBlank(admin.getAdminPassword())) {
             String password = admin.getAdminPassword();
             admin.setAdminPassword(PasswordEncryptionUtils.plainText2MD5Encrypt(password));
         }
