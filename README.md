@@ -12,6 +12,9 @@
 - 体验地址：[点我跳转](http://139.199.66.197:8082)
 - 账户名：`13842512341`
 - 密码：`test13456`
+- 报修二维码（对应的二维码合一在后台生成并下载，如果后台在登录的状态下提交表单，会有自动刷新并且提示有新工单，间隔时间为30秒）
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190124170327672.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMzNTk2OTc4,size_16,color_FFFFFF,t_70)
 
 &nbsp;&nbsp;&nbsp;&nbsp;本项目我将会以【机房报修管理系统】系列，以教程的形式发放在我的博客上：[点我跳转](https://blog.csdn.net/qq_33596978)，欢迎各位阅读我的文章。
 
@@ -43,7 +46,19 @@
 
 [【机房报修管理系统】后端篇（十二） Service层开发——工单管理服务](https://blog.csdn.net/qq_33596978/article/details/86491704)
 
-[【机房报修管理系统】 后端篇（十三） Service层开发——历史工单管理服务](https://blog.csdn.net/qq_33596978/article/details/86508279)
+[【机房报修管理系统】后端篇（十三） Service层开发——历史工单管理服务](https://blog.csdn.net/qq_33596978/article/details/86508279)
+
+[【机房报修管理系统】后端篇（十四） Service层开发——实训室管理服务](https://blog.csdn.net/qq_33596978/article/details/86523707)
+
+[【机房报修管理系统】后端篇（十五） Service层开发——实训楼管理服务](https://blog.csdn.net/qq_33596978/article/details/86552072)
+
+[【机房报修管理系统】后端篇（十六） Service层开发——邮件服务](https://blog.csdn.net/qq_33596978/article/details/86576329)
+
+[【机房报修管理系统】后端篇（十七） Service层开发——角色权限服务](https://blog.csdn.net/qq_33596978/article/details/86594543)
+
+[【机房报修管理系统】后端篇（十八） Controller层开发——相关介绍Q&A](https://blog.csdn.net/qq_33596978/article/details/86610480)
+
+[【机房报修管理系统】 后端篇（十九） Controller层开发——管理员相关接口](https://blog.csdn.net/qq_33596978/article/details/86660407)
 # 二、涉及到的技术
 ## 1.后端
 ### （1）框架
