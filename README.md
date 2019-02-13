@@ -63,6 +63,8 @@
 [【机房报修管理系统】后端篇（二十） Controller层开发——工单管理相关接口](https://blog.csdn.net/qq_33596978/article/details/87088293)
 
 [【机房报修管理系统】后端篇（二十一） Controller层开发——历史工单相关接口](https://blog.csdn.net/qq_33596978/article/details/87179543)
+
+[【机房报修管理系统】 后端篇（二十二）Controller层开发——二维码相关接口、Zip压缩以及定时任务](https://blog.csdn.net/qq_33596978/article/details/87185149)
 # 二、涉及到的技术
 ## 1.后端
 ### （1）框架
