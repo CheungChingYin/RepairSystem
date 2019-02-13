@@ -48,7 +48,7 @@ public class QRCodeUtils {
             g.fillRect(0, 0, 700, 300);
             g.drawImage(bufferedImage, 0, 0, null);
             g.setColor(Color.BLACK);
-            g.setFont(new Font("宋体", Font.PLAIN, 20));
+            g.setFont(new Font("微软雅黑", Font.PLAIN, 20));
             g.drawString("所在实训楼:" + clazz.getBuildingName(), 350, 50);
             g.drawString("所在实训室:" + clazz.getClassName(), 350, 100);
             g.drawString("电脑编号:" + computerStartNum, 350, 150);
