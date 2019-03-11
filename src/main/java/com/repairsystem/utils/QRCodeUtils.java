@@ -30,9 +30,10 @@ public class QRCodeUtils {
      * @return存储图片的文件夹地址
      */
     public static String generateQRCode(String domain, Class clazz, Integer computerStartNum, Integer computerEndNum) {
-        if (computerStartNum.equals(computerEndNum)) {
+        if (computerStartNum.equals(computerEndNum)) {//如果只生成一台电脑的二维码时（即开始编号和结束编号一致）
             BufferedImage bufferedImage = null;
             try {
+                //调用第三方二维码生成工具，记录二维码信息
                 bufferedImage = QrCodeGenWrapper.of("http://" + domain + "?buildingId=" + clazz.getBuildingId() + "&buildingName=" + clazz.getBuildingName() + "&classId=" + clazz.getClassId() + "&className=" + clazz.getClassName() + "&computerNum=" + computerStartNum)
                         .setW(300)
                         .setH(300)
@@ -42,6 +43,8 @@ public class QRCodeUtils {
             } catch (WriterException e) {
                 e.printStackTrace();
             }
+
+            //新建画布，重画二维码
             BufferedImage picture = new BufferedImage(700, 300, BufferedImage.TYPE_INT_RGB);
             Graphics2D g = (Graphics2D) picture.getGraphics();
             g.setColor(Color.WHITE);
@@ -58,6 +61,8 @@ public class QRCodeUtils {
 
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String currentDate = simpleDateFormat.format(new Date());
+
+            //新建文件夹存储二维码图像，文件夹路径为"/opt/QRCode/当前日期年-月-日/UUID"
             String realPath = ConstantUtils.Path.DIRPATH + ConstantUtils.Path.QRCODEPATH + "/" + currentDate + "/" + UUID.randomUUID() + "/";
             String fileName = clazz.getBuildingName() + "-" + clazz.getClassName() + "-" + computerStartNum + ".jpg";
 
