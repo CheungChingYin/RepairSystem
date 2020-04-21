@@ -27,6 +27,10 @@
     <!--生成二维码的外部项目源-->
     <repositories>
         <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+        <repository>
             <id>yihui-maven-repo</id>
             <url>https://raw.githubusercontent.com/liuyueyi/maven-repository/master/repository</url>
         </repository>
@@ -56,7 +60,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
-
 
 
         <!--数据库相关配置-->
@@ -159,9 +162,9 @@
 
         <!--二维码生成器插件-->
         <dependency>
-            <groupId>com.github.hui.media</groupId>
+            <groupId>com.github.liuyueyi.quick-media</groupId>
             <artifactId>qrcode-plugin</artifactId>
-            <version>1.0</version>
+            <version>2.2</version>
         </dependency>
 
         <!--压缩文件上传工具-->
