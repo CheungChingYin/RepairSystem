@@ -148,10 +148,6 @@ public class AdministratorController {
     @ApiOperation(value = "保存管理员信息")
     @PostMapping("/saveAdministratorInfo")
     public JsonResult saveAdministratorInfo(@RequestBody Administrator admin) {
-
-        if (StringUtils.isBlank(admin.getAdminId().toString())) {
-            return JsonResult.errorMsg("管理员ID不能为空");
-        }
         adminService.saveAdministrator(admin);
         return JsonResult.ok();
     }
