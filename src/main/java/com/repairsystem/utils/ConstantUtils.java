@@ -10,7 +10,7 @@ public interface ConstantUtils {
     /**
      * 维修单状态码
      */
-    public static class OrderStatus{
+    public static class OrderStatus {
 
         /**
          * 未维修状态码：0
@@ -28,7 +28,7 @@ public interface ConstantUtils {
         public static final Integer REPAIRED = 2;
     }
 
-    public static class Page{
+    public static class Page {
 
         //一页展示多少条
         public static final Integer PAGESIZE = 10;
@@ -37,7 +37,7 @@ public interface ConstantUtils {
         public static final Integer PAGESNUM = 4;
     }
 
-    class Path{
+    class Path {
 
         //虚拟目录地址
         public static final String DIRPATH = "E:/Images";
@@ -46,10 +46,10 @@ public interface ConstantUtils {
 
     }
 
-    class Cookie{
+    class Cookie {
 
         //Cookie最长存活时间(单位：秒)
-        public static final int COOKIE_MAX_TIME = 3*24*3600;
+        public static final int COOKIE_MAX_TIME = 3 * 24 * 3600;
     }
 
 //    class Redis{
@@ -57,7 +57,7 @@ public interface ConstantUtils {
 //        public static final long REDIS_MAX_TIME = 3*24*3600;
 //    }
 
-    class Mail{
-        public static final String FROM_MAIL="FSPT_RepairManagement@outlook.com";
+    class Mail {
+        public static final String FROM_MAIL = "FSPT_RepairManagement@outlook.com";
     }
 }

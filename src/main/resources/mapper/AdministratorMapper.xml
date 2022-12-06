@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.repairsystem.dao.AdministratorMapper" >
-  <resultMap id="BaseResultMap" type="com.repairsystem.entity.Administrator" >
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <id column="admin_id" property="adminId" jdbcType="INTEGER" />
-    <result column="admin_password" property="adminPassword" jdbcType="VARCHAR" />
-    <result column="admin_name" property="adminName" jdbcType="VARCHAR" />
-    <result column="admin_phone" property="adminPhone" jdbcType="CHAR" />
-    <result column="role_id" property="roleId" jdbcType="INTEGER" />
-    <result column="admin_email" property="adminEmail" jdbcType="VARCHAR" />
-  </resultMap>
+<mapper namespace="com.repairsystem.dao.AdministratorMapper">
+    <resultMap id="BaseResultMap" type="com.repairsystem.entity.Administrator">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="admin_id" property="adminId" jdbcType="INTEGER"/>
+        <result column="admin_password" property="adminPassword" jdbcType="VARCHAR"/>
+        <result column="admin_name" property="adminName" jdbcType="VARCHAR"/>
+        <result column="admin_phone" property="adminPhone" jdbcType="CHAR"/>
+        <result column="role_id" property="roleId" jdbcType="INTEGER"/>
+        <result column="admin_email" property="adminEmail" jdbcType="VARCHAR"/>
+    </resultMap>
 
-  <select id="getAdministratorCount" resultType="java.lang.Integer">
-    SELECT COUNT(*) FROM administrator
-  </select>
+    <select id="getAdministratorCount" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM administrator
+    </select>
 </mapper>

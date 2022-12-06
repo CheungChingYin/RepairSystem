@@ -19,48 +19,43 @@
     </resultMap>
 
     <select id="getAllCompleteOrder" resultMap="BaseResultMap">
-     SELECT
-        co.*, a.admin_name AS adminName,
-        c.class_name AS className,
-        b.building_name AS buildingName
-    FROM
-        complete_order AS co
-    LEFT JOIN class AS c ON c.class_id = co.class_id
-    LEFT JOIN building AS b ON b.building_id = co.building_id
-    LEFT JOIN administrator AS a ON a.admin_id = co.admin_id
-    ORDER BY
-	  co.complete_time DESC
-  </select>
+        SELECT co.*,
+               a.admin_name    AS adminName,
+               c.class_name    AS className,
+               b.building_name AS buildingName
+        FROM complete_order AS co
+                 LEFT JOIN class AS c ON c.class_id = co.class_id
+                 LEFT JOIN building AS b ON b.building_id = co.building_id
+                 LEFT JOIN administrator AS a ON a.admin_id = co.admin_id
+        ORDER BY co.complete_time DESC
+    </select>
     <select id="getCompleteOrderById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-        SELECT
-            co.*,a.admin_name AS adminName,
-            c.class_name AS className,
-            b.building_name AS buildingName
-        FROM
-          complete_order AS co
-        LEFT JOIN class AS c ON c.class_id = co.class_id
-        LEFT JOIN building AS b ON b.building_id = co.building_id
-        LEFT JOIN administrator AS a ON a.admin_id = co.admin_id
-        WHERE
-            co.order_id = #{id}
+        SELECT co.*,
+               a.admin_name    AS adminName,
+               c.class_name    AS className,
+               b.building_name AS buildingName
+        FROM complete_order AS co
+                 LEFT JOIN class AS c ON c.class_id = co.class_id
+                 LEFT JOIN building AS b ON b.building_id = co.building_id
+                 LEFT JOIN administrator AS a ON a.admin_id = co.admin_id
+        WHERE co.order_id = #{id}
     </select>
 
     <select id="getCompleteOrderCount" resultType="java.lang.Integer">
-        SELECT COUNT(*) FROM complete_order
+        SELECT COUNT(*)
+        FROM complete_order
     </select>
 
     <select id="getCompleteOrderByKeyWord" resultMap="BaseResultMap" parameterType="java.lang.String">
-        SELECT
-            co.*,a.admin_name AS adminName,
-            c.class_name AS className,
-            b.building_name AS buildingName
-        FROM
-            complete_order AS co
-        LEFT JOIN class AS c ON c.class_id = co.class_id
-        LEFT JOIN building AS b ON b.building_id = co.building_id
-        LEFT JOIN administrator AS a ON a.admin_id = co.admin_id
-        WHERE
-            co.problem LIKE "%"#{keyWord}"%"
+        SELECT co.*,
+               a.admin_name    AS adminName,
+               c.class_name    AS className,
+               b.building_name AS buildingName
+        FROM complete_order AS co
+                 LEFT JOIN class AS c ON c.class_id = co.class_id
+                 LEFT JOIN building AS b ON b.building_id = co.building_id
+                 LEFT JOIN administrator AS a ON a.admin_id = co.admin_id
+        WHERE co.problem LIKE "%"#{keyWord}"%"
         ORDER BY
             co.complete_time DESC
     </select>

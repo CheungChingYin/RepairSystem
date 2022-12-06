@@ -93,14 +93,14 @@ public class OrderController {
 
     @ApiOperation(value = "上传工单图片")
     @PostMapping(value = "/uploadImage")
-    public JsonResult uploadImage(@ApiParam(value = "图片上传") MultipartFile file){
+    public JsonResult uploadImage(@ApiParam(value = "图片上传") MultipartFile file) {
         if (!file.isEmpty()) {
             String dbPath = null;
-            Map<String,String> map = OrderUploadUtils.upLoadOrderImage(file);
-            if (map.get("success") != null){
+            Map<String, String> map = OrderUploadUtils.upLoadOrderImage(file);
+            if (map.get("success") != null) {
                 dbPath = map.get("success");
                 return JsonResult.ok(dbPath);
-            }else{
+            } else {
                 return JsonResult.errorMsg(map.get("failure"));
             }
         } else {
@@ -166,18 +166,18 @@ public class OrderController {
     @ApiOperation(value = "接受维修工单")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "orderId", value = "维修工单ID", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "adminId",value = "接受维修工单管理员ID",required = true,dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "adminId", value = "接受维修工单管理员ID", required = true, dataType = "String", paramType = "query"),
     })
     @GetMapping("/receiveOrder")
-    public JsonResult receiveOrder(Integer orderId,Integer adminId){
+    public JsonResult receiveOrder(Integer orderId, Integer adminId) {
         Orders orderInfo = ordersService.searchOrderById(orderId);
         Orders order = new Orders();
         order.setOrderId(orderId);
         order.setAdminId(adminId);
         order.setStatus(1);
         ordersService.updateOrder(order);
-        String emailResult = emailService.acceptOrderMail(orderInfo.getUserName(),orderInfo.getUserEmail());
-        if(!"OK".equals(emailResult)){
+        String emailResult = emailService.acceptOrderMail(orderInfo.getUserName(), orderInfo.getUserEmail());
+        if (!"OK".equals(emailResult)) {
             JsonResult.errorMsg("邮件发送失败");
         }
         return JsonResult.ok();
@@ -186,17 +186,17 @@ public class OrderController {
     @ApiOperation(value = "完成维修工单")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "orderId", value = "维修工单ID", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "remark",value = "维修备注",dataType = "Long",paramType = "query")
+            @ApiImplicitParam(name = "remark", value = "维修备注", dataType = "Long", paramType = "query")
     })
 
     @PostMapping("/orderComplete")
-    public JsonResult orderComplete(Integer orderId,String remark){
-        if (StringUtils.isBlank(orderId.toString())){
+    public JsonResult orderComplete(Integer orderId, String remark) {
+        if (StringUtils.isBlank(orderId.toString())) {
             return JsonResult.errorMsg("传入的维修工单ID(orderId)不能为空");
         }
         Orders order = ordersService.searchOrderById(orderId);
-        CompleteOrder completeOrder = Entity2VO.entity2VO(order,CompleteOrder.class);
-        if(StringUtils.isNoneBlank(remark)){
+        CompleteOrder completeOrder = Entity2VO.entity2VO(order, CompleteOrder.class);
+        if (StringUtils.isNoneBlank(remark)) {
             completeOrder.setRemark(remark);
         }
         completeOrder.setImagePath(order.getImagesPath());
@@ -212,8 +212,8 @@ public class OrderController {
         }
         ordersService.deleteOrder(orderId);
         classService.increaseComputerEnable(order.getClassId());
-        String emailResult = emailService.completeOrderMail(order.getUserName(),order.getUserEmail());
-        if(!"OK".equals(emailResult)){
+        String emailResult = emailService.completeOrderMail(order.getUserName(), order.getUserEmail());
+        if (!"OK".equals(emailResult)) {
             JsonResult.errorMsg("邮件发送失败");
         }
         return JsonResult.ok();

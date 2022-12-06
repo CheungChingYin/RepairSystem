@@ -13,40 +13,45 @@ import java.util.List;
 public interface OrdersService {
 
     /**
-     * 获取全部维修单
-     * @return
+     * 获取全部工单
+     *
+     * @return 工单信息
      */
     List<Orders> searchAllOrder();
 
     /**
-     * 按照维修单号搜索维修单
-     * @param id
-     * @return
+     * 按照工单号搜索工单
+     *
+     * @param id 工单Id
+     * @return 工单信息
      */
     Orders searchOrderById(Integer id);
 
     /**
      * 获得工单总数量
-     * @return
+     *
+     * @return 工单数量
      */
     Integer getOrderCount();
 
     /**
-     * 添加维修单
-     * @param order
+     * 添加工单
      *
+     * @param order 工单信息
      */
     void saveOrder(Orders order);
 
     /**
-     * 更新维修单
-     * @param order
+     * 更新工单
+     *
+     * @param order 工单信息
      */
     void updateOrder(Orders order);
 
     /**
-     * 删除维修单
-     * @param id
+     * 删除工单
+     *
+     * @param id 工单id
      */
     void deleteOrder(Integer id);
 

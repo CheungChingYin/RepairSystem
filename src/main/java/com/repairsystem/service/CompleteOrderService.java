@@ -13,46 +13,46 @@ import java.util.List;
 public interface CompleteOrderService {
 
     /**
-     * 获取所有完成表单
-     * @return
+     * 获取所有完成工单
+     * @return 完成工单信息
      */
     List<CompleteOrder> searchAllCompleteOrder();
 
     /**
-     * 获取完成维修表单数量
-     * @return
+     * 获取完成维修工单数量
+     * @return 完成工单数量
      */
     Integer getCompleteOrderCount();
 
     /**
-     * 通过表单Id获取表单信息
-     * @param id
-     * @return
+     * 通过工单Id获取工单信息
+     * @param id 工单ID
+     * @return 完成工单数量
      */
     CompleteOrder searchCompleteOrderById(Integer id);
 
     /**
      * 通过关键字搜索完成维修工单
-     * @param keyWord
-     * @return
+     * @param keyWord 关键词
+     * @return 完成工单信息
      */
     List<CompleteOrder> searchCompleteOrderByKeyWord(String keyWord);
 
     /**
-     * 保存已完成表单信息
-     * @param completeOrder
+     * 保存已完成工单信息
+     * @param completeOrder 完成工单信息
      */
     void saveCompleteOrder(CompleteOrder completeOrder);
 
     /**
-     * 更新完成表单信息
-     * @param completeOrder
+     * 更新完成工单信息
+     * @param completeOrder 完成工单信息
      */
     void updateCompleteOrder(CompleteOrder completeOrder);
 
     /**
-     * 删除完成表单信息
-     * @param id
+     * 删除完成工单信息
+     * @param id 工单Id
      */
     void deleteCompleteOrder(Integer id);
 

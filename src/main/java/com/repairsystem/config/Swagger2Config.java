@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Swagger2配置
+ *
  * @author CheungChingYin
  * @date 2018/11/4
  * @time 10:39
@@ -27,7 +29,7 @@ import java.util.List;
 public class Swagger2Config {
 
     @Bean
-    public Docket createRestApi(){
+    public Docket createRestApi() {
         // 为swagger添加header参数可供输入
         ParameterBuilder userTokenHeader = new ParameterBuilder();
         ParameterBuilder userIdHeader = new ParameterBuilder();

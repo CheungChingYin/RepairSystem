@@ -14,10 +14,11 @@ public class PasswordEncryptionUtils {
 
     /**
      * MD5密码加密工具
+     *
      * @param password
      * @return
      */
-    public static String plainText2MD5Encrypt(String password){
+    public static String plainText2MD5Encrypt(String password) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] output = md.digest(password.getBytes());

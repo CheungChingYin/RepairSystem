@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * shiro 认证类
+ *
  * @author CheungChingYin
  * @date 2018/11/4
  * @time 21:29
@@ -36,14 +38,13 @@ public class MyShiroRealm extends AuthorizingRealm {
     /**
      * 为当前登录成功的用户授予权限和分配角色
      *
-     * @param principalCollection
-     * @return
+     * @param principalCollection 认证数据
+     * @return 认证信息
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-
         System.out.println("======授权认证=======");
-        //获得用户手机
+        //获得用户手机好
         String phoneNum = (String) principalCollection.getPrimaryPrincipal();
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         Administrator admin = adminService.searchAdministratorByPhoneNum(phoneNum);
@@ -55,15 +56,12 @@ public class MyShiroRealm extends AuthorizingRealm {
         //设置该用户拥有的角色
         info.addRoles(set);
         return info;
-
-
-
     }
 
     /**
      * 用来验证当前登录的用户，获取认证信息
      *
-     * @param authenticationToken
+     * @param authenticationToken 认证token
      * @return
      * @throws AuthenticationException
      */
@@ -74,12 +72,13 @@ public class MyShiroRealm extends AuthorizingRealm {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         //从数据库获得对应的信息
         Administrator admin = adminService.searchAdministratorByPhoneNum(token.getUsername());
-        if(null == admin){
+        // 根据手机号找不到数据
+        if (null == admin) {
             throw new AccountException("管理员手机号不正确");
-        }else if(admin.getAdminPassword().equals(token.getPassword())){
+        } else if (admin.getAdminPassword().equals(token.getPassword())) {
             throw new AccountException("密码不正确");
         }
-        return new SimpleAuthenticationInfo(token.getUsername(),admin.getAdminPassword(),"adminRealm");
+        return new SimpleAuthenticationInfo(token.getUsername(), admin.getAdminPassword(), "adminRealm");
 
     }
 }

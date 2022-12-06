@@ -43,11 +43,9 @@ public class BuildingServiceImpl implements BuildingService {
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public List<Building> searchBuildingByName(String name) {
-
         if (StringUtils.isBlank(name)) {
             throw new BuildingNameIdIsNullException("传入的教学楼名称为空");
         }
-
         Example example = new Example(Building.class);
         Example.Criteria criteria = example.createCriteria();
         criteria.andLike("buildingName", "%" + name + "%");
@@ -69,7 +67,6 @@ public class BuildingServiceImpl implements BuildingService {
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void updateBuilding(Building building) {
-
         if (StringUtils.isBlank(building.getBuildingId().toString())) {
             throw new BuildingIdIsNullException("传入的教学楼ID为空");
         }
@@ -79,7 +76,6 @@ public class BuildingServiceImpl implements BuildingService {
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void deleteBuilding(Integer id) {
-
         if (StringUtils.isBlank(id.toString())) {
             throw new BuildingIdIsNullException("传入的教学楼ID为空");
         }

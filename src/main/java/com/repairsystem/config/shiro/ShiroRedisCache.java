@@ -8,7 +8,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import java.util.*;
 
 
-public class ShiroRedisCache<K,V> implements Cache<K,V> {
+public class ShiroRedisCache<K, V> implements Cache<K, V> {
     private RedisTemplate redisTemplate;
     private String prefix = "shiro_redis:";
 
@@ -20,11 +20,11 @@ public class ShiroRedisCache<K,V> implements Cache<K,V> {
         this.prefix = prefix;
     }
 
-    public ShiroRedisCache(RedisTemplate redisTemplate){
+    public ShiroRedisCache(RedisTemplate redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
 
-    public ShiroRedisCache(RedisTemplate redisTemplate, String prefix){
+    public ShiroRedisCache(RedisTemplate redisTemplate, String prefix) {
         this(redisTemplate);
         this.prefix = prefix;
     }
@@ -35,13 +35,13 @@ public class ShiroRedisCache<K,V> implements Cache<K,V> {
             return null;
         }
         byte[] bytes = getBytesKey(k);
-        return (V)redisTemplate.opsForValue().get(bytes);
+        return (V) redisTemplate.opsForValue().get(bytes);
 
     }
 
     @Override
     public V put(K k, V v) throws CacheException {
-        if (k== null || v == null) {
+        if (k == null || v == null) {
             return null;
         }
 
@@ -52,11 +52,11 @@ public class ShiroRedisCache<K,V> implements Cache<K,V> {
 
     @Override
     public V remove(K k) throws CacheException {
-        if(k==null){
+        if (k == null) {
             return null;
         }
-        byte[] bytes =getBytesKey(k);
-        V v = (V)redisTemplate.opsForValue().get(bytes);
+        byte[] bytes = getBytesKey(k);
+        V v = (V) redisTemplate.opsForValue().get(bytes);
         redisTemplate.delete(bytes);
         return v;
     }
@@ -74,11 +74,11 @@ public class ShiroRedisCache<K,V> implements Cache<K,V> {
 
     @Override
     public Set<K> keys() {
-        byte[] bytes = (prefix+"*").getBytes();
+        byte[] bytes = (prefix + "*").getBytes();
         Set<byte[]> keys = redisTemplate.keys(bytes);
         Set<K> sets = new HashSet<>();
-        for (byte[] key:keys) {
-            sets.add((K)key);
+        for (byte[] key : keys) {
+            sets.add((K) key);
         }
         return sets;
     }
@@ -87,17 +87,17 @@ public class ShiroRedisCache<K,V> implements Cache<K,V> {
     public Collection<V> values() {
         Set<K> keys = keys();
         List<V> values = new ArrayList<>(keys.size());
-        for(K k :keys){
+        for (K k : keys) {
             values.add(get(k));
         }
         return values;
     }
 
-    private byte[] getBytesKey(K key){
-        if(key instanceof String){
+    private byte[] getBytesKey(K key) {
+        if (key instanceof String) {
             String prekey = this.prefix + key;
             return prekey.getBytes();
-        }else {
+        } else {
             return SerializeUtil.serialize(key);
         }
     }
