@@ -32,14 +32,12 @@ public class AdministratorServiceImpl implements AdministratorService {
     @Override
     public List<Administrator> searchAllAdministrator() {
         return adminMapper.selectAll();
-
     }
 
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public String countAllAdministrator() {
-        String count = adminMapper.getAdministratorCount().toString();
-        return count;
+        return adminMapper.getAdministratorCount().toString();
     }
 
     @Transactional(propagation = Propagation.SUPPORTS)
@@ -83,8 +81,7 @@ public class AdministratorServiceImpl implements AdministratorService {
         password = PasswordEncryptionUtils.plainText2MD5Encrypt(password);
         Example example = new Example(Administrator.class);
         example.createCriteria().andEqualTo("adminPhone", phone).andEqualTo("adminPassword", password);
-        Administrator admin = adminMapper.selectOneByExample(example);
-        return admin;
+        return adminMapper.selectOneByExample(example);
     }
 
     @Transactional(propagation = Propagation.SUPPORTS)
@@ -96,8 +93,7 @@ public class AdministratorServiceImpl implements AdministratorService {
         Administrator admin = new Administrator();
         admin.setAdminPhone(number);
         Administrator result = adminMapper.selectOne(admin);
-        boolean flag = result != null;
-        return flag;
+        return result != null;
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
