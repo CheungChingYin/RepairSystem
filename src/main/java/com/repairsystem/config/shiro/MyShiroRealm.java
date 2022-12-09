@@ -1,5 +1,6 @@
 package com.repairsystem.config.shiro;
 
+import com.repairsystem.config.LoginAdminContext;
 import com.repairsystem.entity.Administrator;
 import com.repairsystem.entity.Role;
 import com.repairsystem.service.AdministratorService;
@@ -48,6 +49,8 @@ public class MyShiroRealm extends AuthorizingRealm {
         String phoneNum = (String) principalCollection.getPrimaryPrincipal();
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         Administrator admin = adminService.searchAdministratorByPhoneNum(phoneNum);
+        // 登录用户放入当前线程
+        LoginAdminContext.setLoginAdminContext(admin);
         //获得该用户角色
         Role role = roleService.searchRoleById(admin.getRoleId());
         //需要将 role 封装到 Set 作为 info.setRoles() 的参数
@@ -79,6 +82,5 @@ public class MyShiroRealm extends AuthorizingRealm {
             throw new AccountException("密码不正确");
         }
         return new SimpleAuthenticationInfo(token.getUsername(), admin.getAdminPassword(), "adminRealm");
-
     }
 }
