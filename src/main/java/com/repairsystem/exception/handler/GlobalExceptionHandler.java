@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * 全局异常不抓
+ * 全局异常捕捉
  *
  * @author CheungChingYin
  * @date 2018/11/6
@@ -20,5 +20,11 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public JsonResult administratorIdIsNullExceptionHandler() {
         return JsonResult.errorMsg("传入的管理员ID为空");
+    }
+
+    @ExceptionHandler(Exception.class)
+    @ResponseBody
+    public JsonResult exceptionHandler() {
+        return JsonResult.errorMsg("内部错误");
     }
 }
