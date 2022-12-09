@@ -178,7 +178,7 @@ public class OrderController {
         ordersService.updateOrder(order);
         String emailResult = emailService.acceptOrderMail(orderInfo.getUserName(), orderInfo.getUserEmail());
         if (!"OK".equals(emailResult)) {
-            JsonResult.errorMsg("邮件发送失败");
+            return JsonResult.errorMsg("邮件发送失败");
         }
         return JsonResult.ok();
     }
@@ -204,17 +204,12 @@ public class OrderController {
         completeOrder.setAdminName(null);
         completeOrder.setClassName(null);
         completeOrder.setBuildingName(null);
-
-        try {
-            completeOrderService.saveCompleteOrder(completeOrder);
-        } catch (Exception e) {
-            return JsonResult.errorException(e.getMessage());
-        }
+        completeOrderService.saveCompleteOrder(completeOrder);
         ordersService.deleteOrder(orderId);
         classService.increaseComputerEnable(order.getClassId());
         String emailResult = emailService.completeOrderMail(order.getUserName(), order.getUserEmail());
         if (!"OK".equals(emailResult)) {
-            JsonResult.errorMsg("邮件发送失败");
+            return JsonResult.errorMsg("邮件发送失败");
         }
         return JsonResult.ok();
 
