@@ -1,6 +1,7 @@
 package com.repairsystem.web.controller;
 
 import com.github.pagehelper.PageHelper;
+import com.repairsystem.config.LoginAdminContext;
 import com.repairsystem.entity.CompleteOrder;
 import com.repairsystem.entity.Orders;
 import com.repairsystem.entity.vo.OrderVO;
@@ -12,8 +13,11 @@ import com.repairsystem.utils.*;
 import com.sun.xml.internal.bind.v2.TODO;
 import io.swagger.annotations.*;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -44,6 +48,12 @@ public class OrderController {
 
     @Autowired
     private EmailService emailService;
+
+    @Autowired
+    SimpMessagingTemplate simpMessagingTemplate;
+
+    private static final Logger log = LoggerFactory.getLogger(OrderController.class);
+
 
 
     @ApiOperation(value = "获得所有维修工单信息")
@@ -177,8 +187,10 @@ public class OrderController {
         order.setStatus(1);
         ordersService.updateOrder(order);
         String emailResult = emailService.acceptOrderMail(orderInfo.getUserName(), orderInfo.getUserEmail());
+        simpMessagingTemplate.convertAndSend(ConstantUtils.WebSocket.BROADCAST_PREFIX
+                + ConstantUtils.WebSocket.RECEIVE_ORDER_TOPIC, ConstantUtils.WebSocket.RECEIVE_ORDER_MESSAGE);
         if (!"OK".equals(emailResult)) {
-            return JsonResult.errorMsg("邮件发送失败");
+           log.error("【发送邮件失败】：工单Id" + orderId);
         }
         return JsonResult.ok();
     }

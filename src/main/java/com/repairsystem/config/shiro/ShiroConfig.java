@@ -83,6 +83,8 @@ public class ShiroConfig {
         filterChainMap.put("/completeOrders/**", "authc");
         filterChainMap.put("/orders/**", "authc");
         filterChainMap.put("/QRCode/**", "authc");
+        // webSocket接口
+        filterChainMap.put("/endpointOne/**", "authc");
         // 配置 logout 过滤器
         filterChainMap.put("/admin/logout", "logout");
         //管理员接口只有超级管理员才能使用

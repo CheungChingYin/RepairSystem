@@ -48,7 +48,9 @@ public interface ConstantUtils {
 
     class Cookie {
 
-        //Cookie最长存活时间(单位：秒)
+        /**
+         * Cookie最长存活时间(单位：秒)
+         */
         public static final int COOKIE_MAX_TIME = 3 * 24 * 3600;
     }
 
@@ -59,5 +61,29 @@ public interface ConstantUtils {
 
     class Mail {
         public static final String FROM_MAIL = "FSPT_RepairManagement@outlook.com";
+    }
+
+    class WebSocket {
+        /**
+         * WebSocket广播前缀
+         */
+        public static final String BROADCAST_PREFIX = "/topic";
+
+        /**
+         * WebSocket点对点前缀
+         */
+        public static final String PEER_TO_PEER_PREFIX = "/queue";
+
+        /**
+         * 接收到新工单WebSocket订阅队列
+         */
+        public static final String RECEIVE_ORDER_TOPIC = "/receiveOrder";
+
+        /**
+         * 接受新工单后的提示
+         */
+        public static final String RECEIVE_ORDER_MESSAGE = "您有一张新工单，请及时查收";
+
+
     }
 }
