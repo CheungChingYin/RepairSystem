@@ -1,5 +1,6 @@
 package com.repairsystem.config.shiro;
 
+import com.repairsystem.config.LoginAdminContext;
 import org.apache.shiro.session.SessionException;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.LogoutFilter;
@@ -62,6 +63,8 @@ public class MySignOutFilter extends LogoutFilter {
                 if (cookieId.equals(cookie.getName())) {
                     System.out.println(cookie.getValue());
                     redisTemplate.delete(cookie);
+                    // 清除线程的登录用户
+                    LoginAdminContext.clear();
                 }
             }
             subject.logout();
