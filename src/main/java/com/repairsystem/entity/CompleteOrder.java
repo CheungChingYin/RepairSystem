@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiModelProperty;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.util.Date;
 @ApiModel(value = "完成工单对象",description = "这是完成工单对象")
 @Table(name = "complete_order")
@@ -71,6 +72,7 @@ public class CompleteOrder {
      * 所属实训室名称
      */
     @ApiModelProperty(hidden = true)
+    @Transient
     private String className;
 
     /**
@@ -84,6 +86,7 @@ public class CompleteOrder {
      * 所属实训楼名称
      */
     @ApiModelProperty(hidden = true)
+    @Transient
     private String buildingName;
 
     @Column(name = "computer_number")

@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @ApiModel(value = "实训室对象", description = "这个是实训室对象")
 public class Class {
@@ -34,6 +35,7 @@ public class Class {
      * 所属教学楼名称
      */
     @ApiModelProperty(hidden = true)
+    @Transient
     private String buildingName;
 
     /**

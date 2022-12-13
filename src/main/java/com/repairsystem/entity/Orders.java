@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.util.Date;
 
 public class Orders {
@@ -34,6 +35,7 @@ public class Orders {
      * 所属实训室名称
      */
     @ApiModelProperty(hidden = true)
+    @Transient
     private String className;
 
     /**
@@ -47,6 +49,7 @@ public class Orders {
      * 所属实训楼名称
      */
     @ApiModelProperty(hidden = true)
+    @Transient
     private String buildingName;
 
     /**
