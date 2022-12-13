@@ -149,6 +149,8 @@ public class OrderController {
 
         ordersService.saveOrder(orders);
         classService.reduceComputerEnable(orders.getClassId());
+        simpMessagingTemplate.convertAndSend(ConstantUtils.WebSocket.BROADCAST_PREFIX
+                + ConstantUtils.WebSocket.RECEIVE_ORDER_TOPIC, ConstantUtils.WebSocket.RECEIVE_ORDER_MESSAGE);
         return JsonResult.ok();
     }
 
@@ -187,8 +189,6 @@ public class OrderController {
         order.setStatus(1);
         ordersService.updateOrder(order);
         String emailResult = emailService.acceptOrderMail(orderInfo.getUserName(), orderInfo.getUserEmail());
-        simpMessagingTemplate.convertAndSend(ConstantUtils.WebSocket.BROADCAST_PREFIX
-                + ConstantUtils.WebSocket.RECEIVE_ORDER_TOPIC, ConstantUtils.WebSocket.RECEIVE_ORDER_MESSAGE);
         if (!"OK".equals(emailResult)) {
            log.error("【发送邮件失败】：工单Id" + orderId);
         }
