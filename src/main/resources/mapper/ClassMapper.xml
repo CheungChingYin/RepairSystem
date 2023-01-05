@@ -15,61 +15,52 @@
     </resultMap>
 
     <select id="getAllClass" resultMap="BaseResultMap">
-        SELECT
-          c.*, b.building_name AS buildingName
-        FROM
-          class c,
-          building b
-        WHERE
-          c.building_id = b.building_id
-        ORDER BY
-          b.building_id,
-          c.class_name
+        SELECT c.*,
+               b.building_name AS buildingName
+        FROM class c,
+             building b
+        WHERE c.building_id = b.building_id
+        ORDER BY b.building_id,
+                 c.class_name
     </select>
 
     <select id="getClassById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-        SELECT
-            c.*, b.building_name AS buildingName
-        FROM
-            class c,
-            building b
-        WHERE
-            c.building_id = b.building_id
-        AND c.class_id = #{id}
-        ORDER BY
-          b.building_id,
-          c.class_name
+        SELECT c.*,
+               b.building_name AS buildingName
+        FROM class c,
+             building b
+        WHERE c.building_id = b.building_id
+          AND c.class_id = #{id}
+        ORDER BY b.building_id,
+                 c.class_name
     </select>
 
     <select id="getClassByName" resultMap="BaseResultMap" parameterType="java.lang.String">
-        SELECT
-          c.*, b.building_name AS buildingName
-        FROM
-          class c,
-          building b
-        WHERE
-          c.building_id = b.building_id
-        AND c.class_name LIKE "%"#{name}"%"
+        SELECT c.*,
+               b.building_name AS buildingName
+        FROM class c,
+             building b
+        WHERE c.building_id = b.building_id
+          AND c.class_name LIKE "%"#{name}"%"
         ORDER BY
-          b.building_id,
-          c.class_name
+            b.building_id,
+            c.class_name
     </select>
 
     <select id="getClassByBuildingId" resultMap="BaseResultMap" parameterType="java.lang.String">
-        SELECT
-          c.*, b.building_name AS buildingName
-        FROM
-          class c,
-          building b
-        WHERE
-          c.building_id = b.building_id
-        AND c.building_id LIKE "%"#{buildingId}"%"
+        SELECT c.*,
+               b.building_name AS buildingName
+        FROM class c,
+             building b
+        WHERE c.building_id = b.building_id
+          AND c.building_id LIKE "%"#{buildingId}"%"
         ORDER BY
-          b.building_id,
-          c.class_name
+            b.building_id,
+            c.class_name
     </select>
 
     <select id="getClassCount" resultType="java.lang.Integer">
-    SELECT COUNT(*) FROM class
-  </select>
+        SELECT COUNT(*)
+        FROM class
+    </select>
 </mapper>

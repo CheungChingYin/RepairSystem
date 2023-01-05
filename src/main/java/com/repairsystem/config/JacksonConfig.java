@@ -14,6 +14,7 @@ import java.io.IOException;
 
 /**
  * 配置Jackson值为null的时候为空
+ *
  * @author CheungChingYin
  * @date 2018/10/28
  * @time 15:19

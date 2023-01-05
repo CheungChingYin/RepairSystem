@@ -29,14 +29,12 @@ public class OrdersServiceImpl implements OrdersService {
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public List<Orders> searchAllOrder() {
-
-       return ordersMapper.getAllOrder();
+        return ordersMapper.getAllOrder();
     }
 
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public Orders searchOrderById(Integer id) {
-
         if (StringUtils.isBlank(id.toString())) {
             throw new OrderIdIsNullException("传入的订单ID为空");
         }
@@ -52,21 +50,18 @@ public class OrdersServiceImpl implements OrdersService {
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void saveOrder(Orders order) {
-
         ordersMapper.insertSelective(order);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void updateOrder(Orders order) {
-
         ordersMapper.updateByPrimaryKeySelective(order);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void deleteOrder(Integer id) {
-
         if (StringUtils.isBlank(id.toString())) {
             throw new OrderIdIsNullException("传入的订单ID为空");
         }

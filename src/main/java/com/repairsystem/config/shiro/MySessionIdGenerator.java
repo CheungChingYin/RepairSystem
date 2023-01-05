@@ -10,9 +10,13 @@ public class MySessionIdGenerator implements SessionIdGenerator{
   private String name;
   public MySessionIdGenerator(String name){
     this.name = name;
-
   }
 
+  /**
+   * 生产sessionId
+   * @param session 会话
+   * @return
+   */
   @Override
   public Serializable generateId(Session session) {
     System.out.println("generator生成的sessionhost："+session.getHost());

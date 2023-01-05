@@ -17,23 +17,22 @@ public class PageUtils {
         Integer tempPage = Integer.parseInt(page);
         Integer tempCount = Integer.parseInt(count);
         Map<String, Object> map = new HashMap<String, Object>();
-
         Integer prePage = prePageHandler(tempPage);
-        Integer nextPage = nextPageHandler(tempPage,tempCount);
-        List<Integer> pageList = pageHandler(tempPage,tempCount);
+        Integer nextPage = nextPageHandler(tempPage, tempCount);
+        List<Integer> pageList = pageHandler(tempPage, tempCount);
         Integer pages = pagesCount(tempCount);
-
-        map.put("page",page);
-        map.put("prePage",prePage);
-        map.put("nextPage",nextPage);
-        map.put("pages",pages);
-        map.put("count",tempCount);
-        map.put("pageList",pageList);
+        map.put("page", page);
+        map.put("prePage", prePage);
+        map.put("nextPage", nextPage);
+        map.put("pages", pages);
+        map.put("count", tempCount);
+        map.put("pageList", pageList);
         return map;
     }
 
     /**
      * 上一页逻辑
+     *
      * @param page
      * @return
      */
@@ -50,6 +49,7 @@ public class PageUtils {
 
     /**
      * 下一页逻辑
+     *
      * @param page
      * @param count
      * @return
@@ -69,20 +69,21 @@ public class PageUtils {
 
     /**
      * 展示出来的页码数
+     *
      * @param page
      * @param count
      * @return
      */
-    public static List<Integer> pageHandler(Integer page,Integer count){
+    public static List<Integer> pageHandler(Integer page, Integer count) {
 
         List<Integer> list = new LinkedList<Integer>();
         Integer PAGENUM = ConstantUtils.Page.PAGESNUM;
 
         Integer pages = pagesCount(count);
         Integer minPages = (page - PAGENUM > 0) ? (page - PAGENUM) : (1);//和上一页同理
-        Integer maxPages = (page + PAGENUM >= pages)?(pages):(page + PAGENUM);//与下一页同理
+        Integer maxPages = (page + PAGENUM >= pages) ? (pages) : (page + PAGENUM);//与下一页同理
 
-        for(int i = minPages;i<= maxPages;i++){
+        for (int i = minPages; i <= maxPages; i++) {
             list.add(i);//添加最小页到最大页之间的页码
         }
         return list;
@@ -90,6 +91,7 @@ public class PageUtils {
 
     /**
      * 页数总数
+     *
      * @param count
      * @return
      */

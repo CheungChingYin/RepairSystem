@@ -12,6 +12,8 @@ import org.springframework.context.annotation.Configuration;
 import javax.sql.DataSource;
 
 /**
+ * Druid配置
+ *
  * @author CheungChingYin
  * @date 2018/11/4
  * @time 10:13
@@ -19,17 +21,27 @@ import javax.sql.DataSource;
 @Configuration
 public class DruidConfig {
 
+    /**
+     * Druid servlet 配置
+     *
+     * @return
+     */
     @Bean
-    public ServletRegistrationBean druidServlet() {//主要实现WEB监控配置处理
+    public ServletRegistrationBean druidServlet() {
         ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new StatViewServlet(), "/druid/*");//进行druid监控的配置处理操作
-        servletRegistrationBean.addInitParameter("loginUsername","CheungChingYin");//用户名
-        servletRegistrationBean.addInitParameter("loginPassword","test123456");//密码
-        servletRegistrationBean.addInitParameter("resetEnable","false");//是否能够重置数据源
+        servletRegistrationBean.addInitParameter("loginUsername", "CheungChingYin");//用户名
+        servletRegistrationBean.addInitParameter("loginPassword", "test123456");//密码
+        servletRegistrationBean.addInitParameter("resetEnable", "false");//是否能够重置数据源
         return servletRegistrationBean;
     }
 
+    /**
+     * 请求统计拦截
+     *
+     * @return
+     */
     @Bean
-    public FilterRegistrationBean filterRegistrationBean(){
+    public FilterRegistrationBean filterRegistrationBean() {
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
         filterRegistrationBean.setFilter(new WebStatFilter());
 
@@ -40,7 +52,7 @@ public class DruidConfig {
 
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource")
-    public DataSource druidDataSource(){
+    public DataSource druidDataSource() {
         return new DruidDataSource();
     }
 }

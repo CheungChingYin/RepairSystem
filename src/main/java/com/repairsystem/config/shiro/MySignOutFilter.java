@@ -1,5 +1,6 @@
 package com.repairsystem.config.shiro;
 
+import com.repairsystem.config.LoginAdminContext;
 import org.apache.shiro.session.SessionException;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.LogoutFilter;
@@ -14,27 +15,36 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Locale;
 
+/**
+ * 登出过滤器
+ * 避免由于ajax请求导致发生302重定向的问题
+ */
 public class MySignOutFilter extends LogoutFilter {
     private static final Logger log = LoggerFactory.getLogger(MySignOutFilter.class);
 
-    private RedisTemplate redisTemplate ;
+    private RedisTemplate redisTemplate;
 
-    public MySignOutFilter(){
+    public MySignOutFilter() {
 
     }
 
-    public MySignOutFilter(RedisTemplate redisTemplate){
+    public MySignOutFilter(RedisTemplate redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
 
+    /**
+     * 用户登出操作
+     *
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @Override
     protected boolean preHandle(ServletRequest request, ServletResponse response) throws Exception {
-
         Subject subject = getSubject(request, response);
-
         // Check if POST only logout is enabled
         if (isPostOnlyLogout()) {
-
             // check if the current request's method is a POST, if not redirect
             if (!WebUtils.toHttp(request).getMethod().toUpperCase(Locale.ENGLISH).equals("POST")) {
                 return onLogoutRequestNotAPost(request, response);
@@ -44,16 +54,17 @@ public class MySignOutFilter extends LogoutFilter {
         String redirectUrl = getRedirectUrl(request, response, subject);
         //try/catch added for SHIRO-298:
         try {
-
-          //登出时从session获取的cookieId
-          String cookieId = (String) subject.getSession().getId();
-          System.out.println(cookieId);
-          Cookie[] cookies = ((HttpServletRequest)request).getCookies();
-            for (Cookie cookie:cookies) {
-              //"登出时从cookie获取得到的cookieId
-                if(cookieId.equals(cookie.getName())){
-                  System.out.println(cookie.getValue());
-                  redisTemplate.delete(cookie);
+            //登出时从session获取的cookieId
+            String cookieId = (String) subject.getSession().getId();
+            System.out.println(cookieId);
+            Cookie[] cookies = ((HttpServletRequest) request).getCookies();
+            for (Cookie cookie : cookies) {
+                //"登出时从cookie获取得到的cookieId
+                if (cookieId.equals(cookie.getName())) {
+                    System.out.println(cookie.getValue());
+                    redisTemplate.delete(cookie);
+                    // 清除线程的登录用户
+                    LoginAdminContext.clear();
                 }
             }
             subject.logout();

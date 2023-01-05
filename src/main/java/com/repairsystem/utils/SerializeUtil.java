@@ -3,6 +3,9 @@ package com.repairsystem.utils;
 
 import java.io.*;
 
+/**
+ * 序列化工具
+ */
 public class SerializeUtil {
     public static Object deserialize(byte[] bytes) {
         Object result = null;

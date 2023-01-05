@@ -37,7 +37,6 @@ public class ClassServiceImpl implements ClassService {
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public Class searchClassById(Integer id) {
-
         if (StringUtils.isBlank(id.toString())) {
             throw new ClassIdIsNullException("传入的实训室ID为空");
         }
@@ -50,7 +49,6 @@ public class ClassServiceImpl implements ClassService {
         if (StringUtils.isBlank(name)) {
             throw new ClassNameIsNullException("传入的实训室名称为空");
         }
-
         return classMapper.getClassByName(name);
     }
 
@@ -82,7 +80,6 @@ public class ClassServiceImpl implements ClassService {
             throw new ClassIdIsNullException("传入的实训室ID为空");
         }
         classMapper.updateByPrimaryKeySelective(classes);
-
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
@@ -97,7 +94,6 @@ public class ClassServiceImpl implements ClassService {
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void increaseComputerEnable(Integer classId) {
-
         Class classes = classMapper.getClassById(classId);
         Integer computerEnable = classes.getComputerEnable() + 1;
         Integer computerDisable = classes.getComputerDisable() - 1;
@@ -109,7 +105,6 @@ public class ClassServiceImpl implements ClassService {
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void reduceComputerEnable(Integer classId) {
-
         Class classes = classMapper.getClassById(classId);
         Integer computerEnable = classes.getComputerEnable() - 1;
         Integer computerDisable = classes.getComputerDisable() + 1;

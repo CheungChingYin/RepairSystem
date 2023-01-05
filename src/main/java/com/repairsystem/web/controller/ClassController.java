@@ -114,12 +114,12 @@ public class ClassController {
     @ApiOperation(value = "通过实训楼ID获得实训室信息")
     @ApiImplicitParam(name = "buildingId", value = "实训室ID", required = true, dataType = "String", paramType = "query")
     @GetMapping("/getClassInfoByBuildingId")
-    public JsonResult getClassInfoByBuildingId(String buildingId){
-        if (StringUtils.isBlank(buildingId)){
+    public JsonResult getClassInfoByBuildingId(String buildingId) {
+        if (StringUtils.isBlank(buildingId)) {
             return JsonResult.errorMsg("传入的实训楼Id不能为空!");
         }
         List<Class> listClass = classService.searchClassByBuildingId(buildingId);
-        List<ClassVO> listVO = Entity2VO.entityList2VOList(listClass,ClassVO.class);
+        List<ClassVO> listVO = Entity2VO.entityList2VOList(listClass, ClassVO.class);
 
         Map<String, Object> resultMap = new HashMap<String, Object>();
         resultMap.put("Info", listVO);
@@ -152,7 +152,7 @@ public class ClassController {
         }
         try {
             classService.deleteClass(classId);
-        }catch (MySQLIntegrityConstraintViolationException e){
+        } catch (MySQLIntegrityConstraintViolationException e) {
             return JsonResult.errorException("由于班级信息和工单绑定,请删除和当前班级相关工单后再进行删除");
         }
         return JsonResult.ok();

@@ -28,7 +28,6 @@ public class OrderUploadUtils {
 
     public static Map<String, String> upLoadOrderImage(MultipartFile file) {
         Map<String, String> resultMap = new HashMap<String, String>();
-
         //检查传入的文件是否为空
         if (file.isEmpty()) {
             resultMap.put("failure", "传入的文件为空");
@@ -36,7 +35,6 @@ public class OrderUploadUtils {
         }
         SimpleDateFormat simpleDateFormatDate = new SimpleDateFormat("yyyy-MM-dd");
         String currentDate = simpleDateFormatDate.format(new Date());
-
         //上传的图片以“/opt/当前时间”为路径
         String fileName = file.getOriginalFilename();
         String realPath = dir + "/" + currentDate + "/";
@@ -44,11 +42,9 @@ public class OrderUploadUtils {
         if (!fileDir.exists()) {
             fileDir.mkdirs();
         }
-
         //仅允许四中图像格式的文件上传，以防报修人传其他文件
         String extName = FilenameUtils.getExtension(fileName);
         String allowImgFormat = "gif,jpg,jpeg,png";
-
         if (!allowImgFormat.contains(extName.toLowerCase())) {
             resultMap.put("failure", "传入的文件不是图像");
             return resultMap;

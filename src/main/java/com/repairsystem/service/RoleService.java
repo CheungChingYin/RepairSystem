@@ -13,13 +13,13 @@ public interface RoleService {
 
     /**
      * 获得全部角色信息
-     * @return
+     * @return 角色信息
      */
     List<Role> searchAllRole();
 
     /**
      * 通过角色ID获取角色信息
-     * @param id
+     * @param id 角色id
      * @return
      */
     Role searchRoleById(Integer id);

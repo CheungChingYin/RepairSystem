@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.repairsystem.dao.BuildingMapper" >
-  <resultMap id="BaseResultMap" type="com.repairsystem.entity.Building" >
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <id column="building_id" property="buildingId" jdbcType="INTEGER" />
-    <result column="building_name" property="buildingName" jdbcType="VARCHAR" />
-  </resultMap>
+<mapper namespace="com.repairsystem.dao.BuildingMapper">
+    <resultMap id="BaseResultMap" type="com.repairsystem.entity.Building">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="building_id" property="buildingId" jdbcType="INTEGER"/>
+        <result column="building_name" property="buildingName" jdbcType="VARCHAR"/>
+    </resultMap>
 
-  <select id="getBuildingCount" resultType="java.lang.Integer">
-    SELECT COUNT(*) FROM building
-  </select>
+    <select id="getBuildingCount" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM building
+    </select>
 </mapper>

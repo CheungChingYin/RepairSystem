@@ -34,6 +34,7 @@ public class ShiroConfig {
 
     /**
      * shiro管理生命周期的东西
+     *
      * @return
      */
     @Bean(name = "lifecycleBeanPostProcessor")
@@ -61,7 +62,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setFilters(filters);
 
         // LinkedHashMap 是有序的，进行顺序拦截器配置
-        Map<String,String> filterChainMap = new LinkedHashMap<String, String>();
+        Map<String, String> filterChainMap = new LinkedHashMap<String, String>();
 
         // TODO 配置可以匿名访问的地址，可以根据实际情况自己添加，放行一些静态资源等，anon 表示放行
         filterChainMap.put("/css/**", "anon");
@@ -72,20 +73,22 @@ public class ShiroConfig {
         filterChainMap.put("/swagger-ui.html/**", "anon");
         // 登录 URL 放行
         filterChainMap.put("/admin/login", "anon");
-        filterChainMap.put("/login","anon");
-        filterChainMap.put("/orders/saveOrders","anon");
-        filterChainMap.put("/orders/uploadImage","anon");
+        filterChainMap.put("/login", "anon");
+        filterChainMap.put("/orders/saveOrders", "anon");
+        filterChainMap.put("/orders/uploadImage", "anon");
 
         //需要认证的接口
-        filterChainMap.put("/building/**","authc");
-        filterChainMap.put("/class/**","authc");
-        filterChainMap.put("/completeOrders/**","authc");
-        filterChainMap.put("/orders/**","authc");
-        filterChainMap.put("/QRCode/**","authc");
+        filterChainMap.put("/building/**", "authc");
+        filterChainMap.put("/class/**", "authc");
+        filterChainMap.put("/completeOrders/**", "authc");
+        filterChainMap.put("/orders/**", "authc");
+        filterChainMap.put("/QRCode/**", "authc");
+        // webSocket接口
+        filterChainMap.put("/endpointOne/**", "authc");
         // 配置 logout 过滤器
         filterChainMap.put("/admin/logout", "logout");
         //管理员接口只有超级管理员才能使用
-        filterChainMap.put("/admin/**","authc,roles[超级管理员]");
+        filterChainMap.put("/admin/**", "authc,roles[超级管理员]");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainMap);
 
@@ -141,6 +144,7 @@ public class ShiroConfig {
 
     /**
      * realm的认证算法
+     *
      * @return
      */
     @Bean(name = "hashedCredentialsMatcher")
@@ -154,6 +158,7 @@ public class ShiroConfig {
 
     /**
      * 缓存管理器的配置
+     *
      * @param redisTemplate
      * @return
      */
@@ -166,7 +171,7 @@ public class ShiroConfig {
     }
 
     /**
-     *  配置sessionmanager，由redis存储数据
+     * 配置sessionmanager，由redis存储数据
      */
     @Bean(name = "sessionManager")
     @DependsOn(value = "lifecycleBeanPostProcessor")
@@ -186,6 +191,7 @@ public class ShiroConfig {
 
     /**
      * 自定义的SessionId生成器
+     *
      * @param name
      * @return
      */
@@ -199,6 +205,7 @@ public class ShiroConfig {
      * 登陆时会根据权限去匹配，如是user权限，则不会先去认证模块认证，而是先去搜索cookie中是否有rememberMeCookie，
      * 如果存在该cookie，则可以绕过认证模块，直接寻找授权模块获取角色权限信息。
      * 如果权限是authc,则仍会跳转到登陆页面去进行登陆认证.
+     *
      * @return
      */
     public SimpleCookie rememberMeCookie() {
@@ -218,9 +225,4 @@ public class ShiroConfig {
         cookieRememberMeManager.setCipherKey(Base64.decode("3AvVhmFLUs0KTA3Kprsdag=="));
         return cookieRememberMeManager;
     }
-
-
-
-
-
 }

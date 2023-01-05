@@ -33,7 +33,7 @@ public class BuildingController {
 
     @ApiOperation(value = "获得全部实训楼信息")
     @GetMapping("/getBuildingInfo")
-    public JsonResult getBuildingInfo(){
+    public JsonResult getBuildingInfo() {
         List<Building> list = buildingService.searchAllBuilding();
         Map<String, Object> resultMap = new HashMap<String, Object>();
         resultMap.put("Info", list);
@@ -93,7 +93,7 @@ public class BuildingController {
             @ApiImplicitParam(name = "buildingName", value = "实训楼名称", required = true, dataType = "String", paramType = "query")
     })
     @GetMapping("/getBuildingInfoByName")
-    public JsonResult getBuildingInfoByName(String page,String buildingName){
+    public JsonResult getBuildingInfoByName(String page, String buildingName) {
         if (StringUtils.isBlank(page)) {
             return JsonResult.errorMsg("传入当前页page参数不能为空");
         }
@@ -101,10 +101,10 @@ public class BuildingController {
             return JsonResult.errorMsg("传入实训楼名称buildingName参数不能为空");
         }
 
-        PageHelper.startPage(Integer.parseInt(page),ConstantUtils.Page.PAGESIZE);
+        PageHelper.startPage(Integer.parseInt(page), ConstantUtils.Page.PAGESIZE);
         List<Building> list = buildingService.searchBuildingByName(buildingName);
 
-        Map<String, Object> pageMap = PageUtils.pageHandler(page, list.size()+"");
+        Map<String, Object> pageMap = PageUtils.pageHandler(page, list.size() + "");
 
         Map<String, Object> resultMap = new HashMap<String, Object>();
         resultMap.put("pageMap", pageMap);
@@ -115,14 +115,14 @@ public class BuildingController {
 
     @ApiOperation(value = "保存实训楼信息")
     @PostMapping("/saveBuildingInfo")
-    public JsonResult saveBuildingInfo(@RequestBody Building building){
+    public JsonResult saveBuildingInfo(@RequestBody Building building) {
         buildingService.savBuilding(building);
         return JsonResult.ok();
     }
 
     @ApiOperation(value = "修改实训楼信息")
     @PostMapping("/updateBuildingInfo")
-    public JsonResult updateBuildingInfo(@RequestBody Building building){
+    public JsonResult updateBuildingInfo(@RequestBody Building building) {
         buildingService.updateBuilding(building);
         return JsonResult.ok();
     }
@@ -130,7 +130,7 @@ public class BuildingController {
     @ApiOperation("删除实训楼信息")
     @ApiImplicitParam(name = "buildingId", value = "实训楼ID", required = true, dataType = "String", paramType = "query")
     @GetMapping("/deleteBuildingInfo")
-    public JsonResult deleteBuildingInfo(Integer buildingId){
+    public JsonResult deleteBuildingInfo(Integer buildingId) {
         buildingService.deleteBuilding(buildingId);
         return JsonResult.ok();
     }
