@@ -16,8 +16,6 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 #RUN mkdir -p /jeecg-boot/config/jeecg/
 
-WORKDIR /jeecg-boot
-
 EXPOSE 8081
 
 #ADD ./src/main/resources/jeecg ./config/jeecg
